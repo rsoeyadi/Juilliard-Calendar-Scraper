@@ -80,7 +80,3 @@ if __name__ == '__main__':
 
     c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date, time, title, venue, tags)''')
     insert_into_db(events)
-
-    
-    
-    
