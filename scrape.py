@@ -5,7 +5,8 @@ from time import sleep
 from datetime import datetime
 
 class Event:
-    def __init__(self, date, time, title, venue, tags):
+    def __init__(self, unique_id, date, time, title, venue, tags):
+        self.unique_id = unique_id
         self.date = date
         self.time = time
         self.title = title
@@ -43,7 +44,8 @@ def get_events():
                 while '' in tags:
                     tags.remove('')
 
-                event = Event(date, time, title, venue, tags)
+                unique_id = hash(title + str(date) + str(time)) % (10 ** 8)
+                event = Event(unique_id, date, time, title, venue, tags)
                 results.append(event)
 
         curr_page += 1
@@ -60,7 +62,7 @@ if __name__ == '__main__':
     events = get_events()
 
     for event in events:
-        print(event)
+        print(event.unique_id)
 
 
     
