@@ -24,14 +24,15 @@ def get_page(url, page_number):
 
 def get_events():
     results = []
-    curr_page = 0
-    while True:
-        sp = get_page("https://www.juilliard.edu/stage-beyond/performance/calendar?start_date_from=-%201%20hours&start_date_thru=&division=All&tags=All&date_hidden=Date&page=", curr_page)
 
-        events = sp.find_all('li', {'class': 'event'})
+    curr_page = 0 # start at page 1
+    while True:
+        sp = get_page("https://www.juilliard.edu/stage-beyond/performance/calendar?start_date_from=-%201%20hours&start_date_thru=&division=All&tags=All&date_hidden=Date&page=", curr_page) 
+
+        events = sp.find_all('li', {'class': 'event'}) # get all events on page
         
         for e in events:
-            if e.find('time'):
+            if e.find('time'): # if we have a time, the rest of the info will be there
                 date_time = e.find('time')
                 date_time = datetime.strptime(date_time.attrs['datetime'], '%Y-%m-%dT%H:%M:%SZ')
                 date = date_time.date()
@@ -50,8 +51,8 @@ def get_events():
                 event = Event(unique_id, date, time, title, venue, tags)
                 results.append(event)
 
-        curr_page += 1
-        if not sp.find('a', {'class': 'button js-load-more'}):
+        curr_page += 1 # increment to move on to next page
+        if not sp.find('a', {'class': 'button js-load-more'}): # "Load More" button is not present
             break
     
     return results
@@ -64,7 +65,7 @@ def insert_into_db(events):
         conn.commit()
         conn.close()
 
-def my_hash(s):
+def my_hash(s): 
     h = 0
     for c in s:
         h = (h * 31 + ord(c)) & 0xFFFFFFFF
