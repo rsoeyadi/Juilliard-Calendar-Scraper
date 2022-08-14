@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Juilcal | Keyword Search</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div id="intro">
+                <p>
+                    Search the Juilliard performances calendar by case-insensitive keyword (ex. "chamber music", "october", "drama")
+                </p>
+                <p>
+                    The results are taken directly from Juilliard's website and updated every day. Performance times are based on EST.
+                </p>
+
+            </div>            
+            <form>
+                {% if not q %}
+                    <input type="search" name="q" placeholder="Search">
+                {% else %}
+                    <input type="search" name="q" placeholder="Search" value="{{q}}">
+                {% endif %}
+                <div class="button-wrapper">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+            <!-- https://alvarotrigo.com/blog/css-text-animations/ -->
+            <div class="results"> 
+                <p id="events-header">
+                    Upcoming Performances
+                </p>
+
+                    {% if not results %}
+                        <p>No results found.</p>
+                    {% else %}
+                        <ul>
+                            {% for result in results %}
+                        
+                            <li>
+                                <ul class="event">
+                                    <li class="event-title">
+                                        {{ result[2]}}
+                                    </li>
+                                    <li class="event-date">
+                                        {{ result[1]|datetimeformat}}
+                                    </li>
+                                    <li>
+                        
+                                    </li>
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    
+            </div>
+        </div>
+        </body>
+</html>
