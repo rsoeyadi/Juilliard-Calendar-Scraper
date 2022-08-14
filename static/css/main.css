@@ -4,9 +4,13 @@
     box-sizing: border-box;   
 }
 
+p {
+    font-size: 2em;
+}
+
 .wrapper {
     margin: 3em auto;
-    padding: 0 1.1em;
+    padding: 0 0.3em;
     max-width: 800px;
 }
 
@@ -24,18 +28,19 @@ input[type=search] {
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
     background-color: #FAFBFC;
-    font-size: 36px;
+    font-size: 3em;
     padding: 0 20px;
     outline: none;
 }
 
 #events-header {
   position: relative;
-  font-size: 35px;
+  font-size: 5.5em;
   position: relative;
   display: inline-block;
   color: rgb(0, 0, 0);
   text-transform: uppercase;
+  margin: 1em 0;
 }
 
 .event {
@@ -109,4 +114,18 @@ button[type=submit]:before {
 
 button[type=submit]:-webkit-details-marker {
   display: none;
+}
+
+@media screen and (min-width: 768px) {
+    
+    input[type=search] {
+        height: 65px;
+    }
+    
+    #events-header {
+        font-size: 3em;
+    }
+
+    /* media query */
+    
 }
