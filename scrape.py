@@ -7,14 +7,14 @@ from datetime import datetime
 class Event:
     def __init__(self, unique_id, date, time, title, venue, tags):
         self.unique_id = unique_id
-        self.date = date
-        self.time = time
-        self.title = title
+        self.date = str(date)
+        self.time = str(time)
+        self.title = title.strip()
         self.venue = venue
         self.tags = tags
         
     def __str__(self):
-        return '{} | {} {} @ {} | {}'.format(str(self.date).strip(), self.time, self.title.strip(), self.venue.strip(), self.tags)
+        return '{} | {} {} @ {} | {}'.format(self.date.strip(), self.time, self.title.strip(), self.venue.strip(), self.tags)
 
 def get_page(url, page_number):
     url = url + str(page_number)
@@ -43,8 +43,10 @@ def get_events():
                 
                 while '' in tags:
                     tags.remove('')
+                
+                tags = ",".join(tags)
 
-                unique_id = hash(title + str(date) + str(time)) % (10 ** 8)
+                unique_id = my_hash(title + str(date) + str(time))
                 event = Event(unique_id, date, time, title, venue, tags)
                 results.append(event)
 
@@ -55,14 +57,31 @@ def get_events():
     return results
 
 def insert_into_db(events):
-    pass
-        
+    for event in events:
+        conn = sqlite3.connect('juilliard.db')
+        c = conn.cursor()
+        c.execute('REPLACE INTO events VALUES (?, ?, ?, ?, ?, ?)', (event.unique_id, event.date, event.time, event.title, event.venue, event.tags))
+        conn.commit()
+        conn.close()
 
+def my_hash(s):
+    h = 0
+    for c in s:
+        h = (h * 31 + ord(c)) & 0xFFFFFFFF
+    return h
+        
 if __name__ == '__main__':
     events = get_events()
 
     for event in events:
-        print(event.unique_id)
+        print(event)
+
+    # create connection
+    conn = sqlite3.connect('juilliard.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date, time, title, venue, tags)''')
+    insert_into_db(events)
 
 
     
