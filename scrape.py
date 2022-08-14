@@ -47,7 +47,7 @@ def get_events():
                 results.append(event)
 
         curr_page += 1
-        if sp.find('a', {'class': 'button js-load-more'}) is None:
+        if not sp.find('a', {'class': 'button js-load-more'}):
             break
     
     return results
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     events = get_events()
 
     for event in events:
-        print(hash(event.title))
+        print(event)
 
 
     
