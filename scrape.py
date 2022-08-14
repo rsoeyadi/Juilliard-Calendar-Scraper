@@ -74,16 +74,12 @@ def my_hash(s):
 if __name__ == '__main__':
     events = get_events()
 
-    for event in events:
-        print(event)
-
     # create connection
     conn = sqlite3.connect('juilliard.db')
     c = conn.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date, time, title, venue, tags)''')
     insert_into_db(events)
-
 
     
     
