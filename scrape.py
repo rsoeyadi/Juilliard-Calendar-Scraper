@@ -53,13 +53,7 @@ def get_events():
     return results
 
 def insert_into_db(events):
-    conn = sqlite3.connect('events.db')
-    c = conn.cursor()
-    c.execute('CREATE TABLE IF NOT EXISTS events (date TEXT, time TEXT, title TEXT, venue TEXT, tags TEXT)')
-    for e in events:
-        c.execute('INSERT INTO events VALUES (?, ?, ?, ?, ?)', (e.date, e.time, e.title, e.venue, e.tags))
-    conn.commit()
-    conn.close()
+    pass
         
 
 if __name__ == '__main__':
