@@ -52,6 +52,10 @@ input[type=search] {
     outline: none;
 }
 
+hr {
+  margin: 1em 0;
+}
+
 #events-header {    
   position: relative;
   position: relative;
