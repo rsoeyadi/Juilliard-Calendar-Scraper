@@ -17,7 +17,6 @@ def index():
     timeDiff = currTime - modTimeSinceEpoc
     time_passed = int(timeDiff.total_seconds() / 60)# get time passed since last modified
 
-    
     return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=time_passed)
 
 def search_db():
