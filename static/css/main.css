@@ -2,10 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;   
+    color: #000000; 
 }
 
 p {
-    font-size: 1.3em;
+    font-family: 'Verdana', sans-serif; 
+    font-size: 16px; 
+    line-height: 26px; 
 }
 
 .wrapper {
@@ -19,6 +22,12 @@ li {
 }
 
 #intro h1 {
+    font-family: 'Helvetica Neue', sans-serif; 
+    font-size: 46px; 
+    font-weight: 300; 
+    line-height: 50px; 
+    letter-spacing: 1px; 
+    border-bottom: double rgb(255, 255, 255);
     font-size: 2em;
 }
 
@@ -50,10 +59,17 @@ input[type=search] {
 
 .event {
     margin-top: 1.3em;
+    background-color: #2D71B5;
+    padding: 1em;
+    border-radius: 0.5em;
 }
 
 .event-title {
     font-size: 23px;
+}
+
+.event-date {
+    color:rgb(200, 200, 200)
 }
 /* button design by Dribbble */ 
 .button-wrapper {
