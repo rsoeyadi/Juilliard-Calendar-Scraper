@@ -1,13 +1,18 @@
 from flask import Flask, session, render_template, request, g
 import sqlite3
 from datetime import datetime
+import os
+import time
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    data = search_db()
-    return render_template("index.html", results=data, q=request.args.get('q'))
+    data = search_db() # get events from database
+
+    modTimeSinceEpoc = os.path.getmtime('./juilliard.db') # get last modified time of database
+    modificationTime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(modTimeSinceEpoc))
+    return render_template("index.html", results=data, q=request.args.get('q'), modificationTime=modificationTime)
 
 def search_db():
     db = getattr(g, '_database', None)
