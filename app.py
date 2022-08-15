@@ -9,22 +9,23 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     data = search_db() # get events from database
+    
+    updatedOn_time = os.path.getmtime('./juilliard.db') # get last modified time of database
+    updatedOn_time = time.ctime(updatedOn_time)  # cast to datetime object
+    updatedOn_time = datetime.strptime(updatedOn_time, "%a %b %d %H:%M:%S %Y")
+    now = datetime.now()
+    lastUpdatedTime = now - updatedOn_time
+    # convert to minutes
+    lastUpdatedTime = lastUpdatedTime.seconds / 60
+    if lastUpdatedTime > 60:
+        lastUpdatedTime = lastUpdatedTime / 60
+        lastUpdatedTime = str(round(lastUpdatedTime, 1)) + " hours"
 
-    modTimeSinceEpoc = os.path.getmtime('./juilliard.db') # get last modified time of database
-    modTimeSinceEpoc = datetime.fromtimestamp(modTimeSinceEpoc)  # cast to datetime object
-    currTime = datetime.now()
-
-    timeDiff = currTime - modTimeSinceEpoc
-    time_passed = int(timeDiff.total_seconds() / 60)# get time passed since last modified
-    if time_passed != 0: 
-        if time_passed > 60: # if time passed is greater than 60 minutes, convert to hours
-            time_passed = int(time_passed / 60)
-            time_passed = str(time_passed) + ' hours'
-        else:
-            time_passed = str(time_passed) + ' minutes'
-    else:
-        time_passed = '0 minutes'
-    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=time_passed)
+    else: 
+        # round to tenth
+        lastUpdatedTime = str(round(lastUpdatedTime, 1)) + " minutes"
+    
+    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdatedTime)
 
 def search_db():
     db = getattr(g, '_database', None)
