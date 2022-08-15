@@ -35,9 +35,9 @@ def search_db():
         db = g._database = sqlite3.connect('./juilliard.db')
     cursor = db.cursor()
     if q:
-        cursor.execute("SELECT * FROM events WHERE title LIKE '%{}%' OR tags LIKE '%{}%' or venue LIKE '%{}%' OR month LIKE '%{}%' OR day LIKE '%{}%' OR year LIKE '%{}%' OR time LIKE '%{}%' or day_of_week LIKE '%{}%' ORDER BY date_time ASC".format(q, q, q, q, q, q, q, q))
+        cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) AND (title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') or (day_of_week LIKE '%{}%') ORDER BY date_time ASC".format(datetime.now().strftime('%Y%m%d'), q, q, q, q, q, q, q, q))
     else:
-        cursor.execute("SELECT * FROM events ORDER BY date_time ASC")
+        cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",(datetime.now().strftime('%Y%m%d'),))
     results = cursor.fetchall()
     
     results = [(str(event[3]), str(event[1]), str(event[2]), str(event[4])) for event in results]
