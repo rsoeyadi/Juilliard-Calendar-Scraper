@@ -13,7 +13,7 @@
   width: 50vmax;
   z-index: -1;
   animation: move 15s ease-in-out infinite;
-  transform-origin: 50% 100%;
+  transform-origin: 50% 60%;
 }
 
 @keyframes move {
