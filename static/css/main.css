@@ -5,6 +5,10 @@
     color: #000000; 
 }
 
+h1 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 300;     
+}
 p {
     font-family: 'Verdana', sans-serif; 
     font-size: 16px; 
@@ -22,10 +26,9 @@ li {
 }
 
 #intro h1 {
-    font-family: 'Helvetica Neue', sans-serif; 
-    font-size: 46px; 
-    font-weight: 300; 
-    line-height: 50px; 
+    font-size: 46px;
+    font-weight: 500;     
+ 
     letter-spacing: 1px; 
     border-bottom: double rgb(255, 255, 255);
     font-size: 2em;
@@ -48,13 +51,14 @@ input[type=search] {
     outline: none;
 }
 
-#events-header {
+#events-header {    
   position: relative;
   position: relative;
   display: inline-block;
   color: rgb(0, 0, 0);
   text-transform: uppercase;
-  margin: 1em 0;
+  margin: 0.5em 0;
+  font-size: 3em;
 }
 
 .event {
@@ -65,11 +69,13 @@ input[type=search] {
 }
 
 .event-title {
-    font-size: 23px;
+    font-size: 23px;      
+    color: rgb(255, 255, 255);
+
 }
 
 .event-date {
-    color:rgb(200, 200, 200)
+    color:rgb(217, 217, 217)
 }
 /* button design by Dribbble */ 
 .button-wrapper {
