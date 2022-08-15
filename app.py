@@ -16,7 +16,11 @@ def index():
 
     timeDiff = currTime - modTimeSinceEpoc
     time_passed = int(timeDiff.total_seconds() / 60)# get time passed since last modified
-
+    if time_passed > 60: # if time passed is greater than 60 minutes, convert to hours
+        time_passed = int(time_passed / 60)
+        time_passed = str(time_passed) + ' hours'
+    else:
+        time_passed = str(time_passed) + ' minutes'
     return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=time_passed)
 
 def search_db():
