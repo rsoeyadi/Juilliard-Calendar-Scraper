@@ -38,6 +38,10 @@ def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
     if not value: 
         return 
     return (datetime.strptime(value, format)).strftime('%a, %B %d, %Y at %-I:%M%p')
+
+@app.context_processor
+def inject_now():
+    return {'now': datetime.utcnow()}
     
 if __name__ == '__main__':
     app.run()
