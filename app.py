@@ -11,8 +11,14 @@ def index():
     data = search_db() # get events from database
 
     modTimeSinceEpoc = os.path.getmtime('./juilliard.db') # get last modified time of database
-    modificationTime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(modTimeSinceEpoc))
-    return render_template("index.html", results=data, q=request.args.get('q'), modificationTime=modificationTime)
+    modTimeSinceEpoc = datetime.fromtimestamp(modTimeSinceEpoc)  # cast to datetime object
+    currTime = datetime.now()
+
+    timeDiff = currTime - modTimeSinceEpoc
+    time_passed = int(timeDiff.total_seconds() / 60)# get time passed since last modified
+
+    
+    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=time_passed)
 
 def search_db():
     db = getattr(g, '_database', None)
