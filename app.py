@@ -1,3 +1,4 @@
+from re import L
 from flask import Flask, session, render_template, request, g
 import sqlite3
 from datetime import datetime
@@ -17,14 +18,12 @@ def index():
     lastUpdatedTime = now - updatedOn_time
     # convert to minutes
     lastUpdatedTime = lastUpdatedTime.seconds / 60
-    # if lastUpdatedTime > 60:
-    #     lastUpdatedTime = lastUpdatedTime / 60
-    #     lastUpdatedTime = str(round(lastUpdatedTime, 1)) + " hours"
 
-    # else: 
-    #     # round to tenth
-    #     lastUpdatedTime = str(round(lastUpdatedTime, 1)) + " minutes"
-    lastUpdatedTime = str(round(lastUpdatedTime, 1)) + " minutes"
+    if lastUpdatedTime > 60:
+        lastUpdatedTime = lastUpdatedTime / 60
+        lastUpdatedTime = str(int(lastUpdatedTime)) + " hours"
+    else:
+        lastUpdatedTime = str(round(lastUpdatedTime)) + " minutes"
     
     return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdatedTime)
 
