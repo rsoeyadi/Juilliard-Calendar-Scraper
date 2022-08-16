@@ -86,8 +86,8 @@ def search_db():
 
     if keywords:
         for i in range(len(keywords)):
-            query += "AND ((title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') or (day_of_week LIKE '%{}%')) "
-            for _ in range(8):
+            query += "AND ((title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') OR (time2 LIKE '%{}%') OR (day_of_week LIKE '%{}%')) "
+            for _ in range(9):
                 if keywords[i] and keywords[i] != '':
                     qs.append(keywords[i])
         query += ("ORDER BY date_time ASC")
