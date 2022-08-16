@@ -108,6 +108,7 @@ button[type=submit] {
   transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
   user-select: none;
   -webkit-user-select: none;
+  -webkit-appearance: none !important;
   touch-action: manipulation;
   vertical-align: middle;
   white-space: nowrap;
@@ -151,6 +152,7 @@ button[type=submit]:-webkit-details-marker {
 }
 
 .filter-button {
+  -webkit-appearance: none !important;
   margin: 1em 0.5em 0.5em 0;
   background-color: #e4e4e4;
   border: 0;
@@ -187,6 +189,7 @@ button[type=submit]:-webkit-details-marker {
 }
 
 #clear-filters-button {
+  -webkit-appearance: none !important;
   margin: 0 0 0.5em 0;
   align-items: center;
   background-color: #2D71B5;
