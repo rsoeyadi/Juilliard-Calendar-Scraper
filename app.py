@@ -10,11 +10,11 @@ app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    session["data"] = search_db() # get events from database
-    session["lastUpdated"] = get_last_updated_time()
+    data = search_db() # get events from database
+    lastUpdated = get_last_updated_time()
     keywords = get_keywords()
 
-    return render_template("index.html", results=session["data"], q=request.args.get('q'), lastUpdatedTime=session["lastUpdated"], keywords=keywords)
+    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdated, keywords=keywords)
 
 @app.route("/add_keyword", methods=['POST'])
 def add_keyword():
