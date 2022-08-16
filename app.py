@@ -1,18 +1,16 @@
 from re import L
-from flask import Flask, session, render_template, request, g
+from flask import Flask, render_template, request, g, session
 import sqlite3
 from datetime import datetime
 import os
 import time
 
 app = Flask(__name__)
-
-global keywords
-keywords = []
+app.secret_key = os.urandom(12)
 
 @app.route("/")
 def index():
-    global keywords
+    keywords = get_keywords()
 
     data = search_db() # get events from database
     
@@ -33,7 +31,7 @@ def index():
     return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdatedTime, keywords=keywords)
    
 def search_db():
-    global keywords
+    keywords = get_keywords()
     db = getattr(g, '_database', None)
     q = request.args.get('q')
 
@@ -43,6 +41,7 @@ def search_db():
 
     if q and q not in keywords:
         keywords.append(q)
+        session['keywords'] = keywords
 
     qs = []
     query = "SELECT * FROM events WHERE(yyyymmdd >= {}) "
@@ -55,9 +54,6 @@ def search_db():
                     qs.append(keywords[i])
         query += ("ORDER BY date_time ASC")
         currTime = datetime.now().strftime('%Y%m%d')
-        app.logger.error(query)
-        # app.logger.error(qs)
-        app.logger.error("QUERY: " + query.format(currTime, *qs,))
         cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs,))
     else:
         cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",(datetime.now().strftime('%Y%m%d'),))
@@ -67,6 +63,11 @@ def search_db():
     if not results:
         return
     return results
+
+def get_keywords():
+    if not session.get('keywords'):
+        session['keywords'] = []
+    return session['keywords']
 
 @app.teardown_appcontext
 def close_connection(exception):
