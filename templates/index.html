@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -64,16 +66,18 @@
                 {% for result in results %}
 
                 <li>
-                    <ul class="event">
-                        <a class="event-link" href="{{ result[4]}}">
-                            <li class="event-title">
-                                {{ result[2]}}
-                            </li>
-                            <li class="event-date">
-                                {{ result[1]|datetimeformat}}
-                            </li>
-                        </a>
-                    </ul>
+                    <div class="event-wrapper">
+                        <ul class="event" data-aos="fade-up" data-aos-offset="-50">
+                            <a class="event-link" href="{{ result[4]}}">
+                                <li class="event-title">
+                                    {{ result[2]}}
+                                </li>
+                                <li class="event-date">
+                                    {{ result[1]|datetimeformat}}
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
@@ -82,4 +86,8 @@
     </div>
 </body>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </html>
