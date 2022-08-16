@@ -29,12 +29,12 @@
         </div>
         <form action="/add_keyword" , method="POST">
             {% if not q %}
-            <input type="search" name="q" placeholder="Search">
+            <input type="search" name="q" placeholder="Add Filter">
             {% else %}
-            <input type="search" name="q" placeholder="Search" value="{{q}}">
+            <input type="search" name="q" placeholder="Add Filter" value="{{q}}">
             {% endif %}
             <div class="button-wrapper">
-                    <button name="add_keyword" type="submit">Search</button>
+                    <button name="add_keyword" type="submit">Submit</button>
             </div>
         </form>
         <!-- {% if keywords|length > 0 %} -->
