@@ -6,10 +6,14 @@ import os
 import time
 
 app = Flask(__name__)
+
+global keywords
 keywords = []
 
 @app.route("/")
 def index():
+    global keywords
+
     data = search_db() # get events from database
     
     updatedOn_time = os.path.getmtime('./juilliard.db') # get last modified time of database
@@ -26,9 +30,10 @@ def index():
     else:
         lastUpdatedTime = str(round(lastUpdatedTime)) + " minutes"
     
-    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdatedTime)
-
+    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdatedTime, keywords=keywords)
+   
 def search_db():
+    global keywords
     db = getattr(g, '_database', None)
     q = request.args.get('q')
 
@@ -36,19 +41,24 @@ def search_db():
         db = g._database = sqlite3.connect('./juilliard.db')
     cursor = db.cursor()
 
-    keywords.append(q)
+    if q and q not in keywords:
+        keywords.append(q)
+
     qs = []
+    query = "SELECT * FROM events WHERE(yyyymmdd >= {}) "
+
     if q:
-        query = "SELECT * FROM events WHERE(yyyymmdd >= {}) "
         for i in range(len(keywords)):
             query += "AND ((title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') or (day_of_week LIKE '%{}%')) "
             for _ in range(8):
                 if keywords[i] and keywords[i] != '':
                     qs.append(keywords[i])
         query += ("ORDER BY date_time ASC")
-        # app.logger.error(query)
+        currTime = datetime.now().strftime('%Y%m%d')
+        app.logger.error(query)
         # app.logger.error(qs)
-        cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs))
+        app.logger.error("QUERY: " + query.format(currTime, *qs,))
+        cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs,))
     else:
         cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",(datetime.now().strftime('%Y%m%d'),))
     results = cursor.fetchall()
