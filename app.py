@@ -22,12 +22,16 @@ def add_keyword():
         keywords = get_keywords()
         kw = request.form.get("q", False)
         kw = kw.strip() # remove whitespace
-        
-        if kw:
-            if kw not in keywords:
-                keywords.append(kw)
-                session['keywords'] = keywords
-            session.modified = True
+
+        # split keywords by spaces
+        curr_list = kw.split(" ")
+
+        for kw in curr_list:
+            if kw:
+                if kw not in keywords:
+                    keywords.append(kw)
+                    session['keywords'] = keywords
+                session.modified = True
 
     return redirect(url_for('index'))
 
