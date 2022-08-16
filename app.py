@@ -26,12 +26,11 @@ def remove_keyword():
         if kw in keywords:
             keywords.remove(kw)
             session['keywords'] = keywords
-                        
+
         session['keywords'] = keywords
         return index()
     
     return index()
-
 
 @app.route("/add_keyword", methods=['GET', 'POST'])
 def add_keyword():
