@@ -10,10 +10,12 @@ app.secret_key = os.urandom(12)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    keywords = get_keywords()
+    
     data = search_db() # get events from database
     lastUpdated = get_last_updated_time()
-    app.logger.error(session['keywords'])
+    keywords = get_keywords()
+
+
     return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdated, keywords=keywords)
    
 @app.route("/remove_keyword", methods=['GET', 'POST'])
@@ -29,19 +31,22 @@ def remove_keyword():
         app.logger.error("removing->" + kw)
             
         session['keywords'] = keywords
+        return index()
+    
     return index()
 
 
 @app.route("/add_keyword", methods=['GET', 'POST'])
 def add_keyword():
-    keywords = get_keywords()
-    keyword = request.form.get('keyword', False)
+    if request.method == 'POST':
+        keywords = get_keywords()
+        keyword = request.form.get('add_keyword', False)
 
-    for keyword in keywords:
-        if keyword not in session['keywords']:
-            session['keywords'].append(keyword)
+        for keyword in keywords:
+            if keyword not in session['keywords']:
+                session['keywords'].append(keyword)
 
-    session['keywords'] = keywords
+        session['keywords'] = keywords
     return index()
 
 def get_last_updated_time():
