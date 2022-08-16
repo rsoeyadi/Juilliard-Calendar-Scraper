@@ -44,6 +44,8 @@ def get_events():
                 day = date_time.strftime('%d') # for searching db by day in app
                 year = date_time.strftime('%Y') # for searching db by year in app
                 time = date_time.strftime('%I:%M%p') # for searching db by time in app
+                if ":00" in time: 
+                    time = time.replace(":00", "")
                 day_of_week = date_time.strftime('%A') # for searching db by day of week in app
                 title = e.find('div', {'class': 'title-subtitle'}).text
                 venue = e.find('div', {'class': 'field--name-field-venue'}).text
