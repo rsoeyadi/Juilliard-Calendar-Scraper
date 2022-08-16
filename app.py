@@ -1,4 +1,3 @@
-from re import L
 from flask import Flask, render_template, request, g, session, redirect, url_for
 import sqlite3
 from datetime import datetime
@@ -46,7 +45,6 @@ def remove_keyword():
             keywords.remove(kw)
             session['keywords'] = keywords
         session.modified = True
-    
     return redirect(url_for('index'))
 
 @app.route("/clear_all_filters", methods=['POST'])
@@ -119,7 +117,7 @@ def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
     if not value: 
         return 
     return (datetime.strptime(value, format)).strftime('%a, %B %d, %Y at %-I:%M%p')
-
+    
 @app.context_processor
 def inject_now():
     return {'now': datetime.utcnow()}

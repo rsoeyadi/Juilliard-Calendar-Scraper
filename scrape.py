@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import sqlite3
-from time import sleep
 from datetime import datetime
 
 class Event:
@@ -19,7 +18,7 @@ class Event:
         self.day_of_week = day_of_week
         self.yyyymmdd = yyyymmdd
         self.link = link
-        
+    
     def __str__(self):
         return '{} | {} @ {} | {}'.format((self.date_time), self.title.strip(), self.venue.strip(), self.tags)
 
