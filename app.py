@@ -21,7 +21,8 @@ def add_keyword():
     if request.method == 'POST':
         keywords = get_keywords()
         kw = request.form.get("q", False)
-
+        kw = kw.strip() # remove whitespace
+        
         if kw:
             if kw not in keywords:
                 keywords.append(kw)
