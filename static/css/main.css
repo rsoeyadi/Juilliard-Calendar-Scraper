@@ -185,3 +185,49 @@ button[type=submit]:-webkit-details-marker {
 .filter-button:focus-visible {
   box-shadow: none;
 }
+
+#clear-filters-button {
+  margin: 0 0 0.5em 0;
+  align-items: center;
+  background-color: #2D71B5;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+#clear-filters-button:hover,
+#clear-filters-button:focus { 
+  background-color: #22588d;
+  color: #ffffff;
+}
+
+#clear-filters-button:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+#clear-filters-button:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}

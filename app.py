@@ -43,6 +43,13 @@ def remove_keyword():
     
     return redirect(url_for('index'))
 
+@app.route("/clear_all_filters", methods=['POST'])
+def clear_all_filters():
+    if request.method == 'POST':
+        session['keywords'] = []
+        session.modified = True
+    return redirect(url_for('index'))
+
 def get_last_updated_time():
     # get last modified time of database
     updatedOn_time = os.path.getmtime('./juilliard.db')
