@@ -15,7 +15,6 @@ def index():
     keywords = get_keywords()
 
     return render_template("index.html", results=session["data"], q=request.args.get('q'), lastUpdatedTime=session["lastUpdated"], keywords=keywords)
-   
 
 @app.route("/add_keyword", methods=['POST'])
 def add_keyword():
@@ -28,6 +27,7 @@ def add_keyword():
                 keywords.append(kw)
                 session['keywords'] = keywords
             session.modified = True
+
     return redirect(url_for('index'))
 
 @app.route("/remove_keyword", methods=['POST'])
@@ -39,8 +39,6 @@ def remove_keyword():
         if kw in keywords:
             keywords.remove(kw)
             session['keywords'] = keywords
-
-        session['keywords'] = keywords
         session.modified = True
     
     return redirect(url_for('index'))
@@ -87,6 +85,7 @@ def search_db():
     results = cursor.fetchall()
     
     results = [(str(event[3]), str(event[1]), str(event[2]), str(event[4])) for event in results]
+
     if not results:
         return
     return results
