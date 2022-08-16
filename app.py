@@ -27,7 +27,7 @@ def remove_keyword():
             session['keywords'] = keywords
 
         session['keywords'] = keywords
-        return index()
+        session.modified = True
     
     return index()
 
@@ -40,7 +40,7 @@ def add_keyword():
         if kw not in keywords:
             keywords.append(kw)
             session['keywords'] = keywords
-    
+        session.modified = True
     return index()
 
 
