@@ -35,13 +35,13 @@
             </div>
         </form>
         <!-- {% if keywords|length > 0 %} -->
+        <div class="filters-wrapper">
         {% for keyword in keywords %}
             <form action="/remove_keyword", method="POST">
-                
-                    <input type="submit" value="{{ keyword }}" name="remove_keyword">{{ keyword }}</input>
-                
+                        <input type="submit" value="{{ keyword }}" name="remove_keyword" class="filter-button"></input>
             </form>
         {% endfor %}
+        </div>
         <!-- {% endif %} -->
         <hr>
         <h1>
