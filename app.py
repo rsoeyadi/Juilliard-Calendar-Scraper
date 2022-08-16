@@ -6,6 +6,7 @@ import os
 import time
 
 app = Flask(__name__)
+keywords = []
 
 @app.route("/")
 def index():
@@ -34,8 +35,20 @@ def search_db():
     if db is None:
         db = g._database = sqlite3.connect('./juilliard.db')
     cursor = db.cursor()
+
+    keywords.append(q)
+    qs = []
     if q:
-        cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= {}) AND ((title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') or (day_of_week LIKE '%{}%')) ORDER BY date_time ASC".format(datetime.now().strftime('%Y%m%d'), q, q, q, q, q, q, q, q))
+        query = "SELECT * FROM events WHERE(yyyymmdd >= {}) "
+        for i in range(len(keywords)):
+            query += "AND ((title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') or (day_of_week LIKE '%{}%')) "
+            for _ in range(8):
+                if keywords[i] and keywords[i] != '':
+                    qs.append(keywords[i])
+        query += ("ORDER BY date_time ASC")
+        # app.logger.error(query)
+        # app.logger.error(qs)
+        cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs))
     else:
         cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",(datetime.now().strftime('%Y%m%d'),))
     results = cursor.fetchall()
