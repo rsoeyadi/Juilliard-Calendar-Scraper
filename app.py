@@ -10,26 +10,12 @@ app.secret_key = os.urandom(12)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    data = search_db() # get events from database
-    lastUpdated = get_last_updated_time()
-    keywords = get_keywords()
+    session["data"] = search_db() # get events from database
+    session["lastUpdated"] = get_last_updated_time()
+    session["keywords"] = get_keywords()
 
-    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdated, keywords=keywords)
+    return render_template("index.html", results=session["data"], q=request.args.get('q'), lastUpdatedTime=session["lastUpdated"], keywords=session["keywords"])
    
-@app.route("/remove_keyword", methods=['GET', 'POST'])
-def remove_keyword():
-    if request.method == 'POST':
-        keywords = get_keywords()
-        kw = request.form.get('remove_keyword', False)
-
-        if kw in keywords:
-            keywords.remove(kw)
-            session['keywords'] = keywords
-
-        session['keywords'] = keywords
-        session.modified = True
-    
-    return index()
 
 @app.route("/add_keyword", methods=['POST'])
 def add_keyword():
@@ -43,6 +29,20 @@ def add_keyword():
         session.modified = True
     return index()
 
+@app.route("/remove_keyword", methods=['POST'])
+def remove_keyword():
+    if request.method == 'POST':
+        keywords = get_keywords()
+        kw = request.form.get('remove_keyword', False)
+
+        if kw in keywords:
+            keywords.remove(kw)
+            session['keywords'] = keywords
+
+        session['keywords'] = keywords
+        session.modified = True
+    
+    return index()
 
 def get_last_updated_time():
     # get last modified time of database
