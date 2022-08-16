@@ -6,7 +6,7 @@ import os
 import time
 
 app = Flask(__name__)
-app.secret_key = "HF2HF380WEFPIiefheiwfo8efs80f80239fhIO93810lfsh"
+app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN\xfcR87"
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
