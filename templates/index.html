@@ -22,16 +22,14 @@
                 based on EST.
             </p>
         </div>
-        <form>
+        <form action="/add_keyword" , method="POST">
             {% if not q %}
             <input type="search" name="q" placeholder="Search">
             {% else %}
             <input type="search" name="q" placeholder="Search" value="{{q}}">
             {% endif %}
             <div class="button-wrapper">
-                <form action="/add_keyword", method="POST">
-                    <button name="keyword" type="submit">Search</button>
-                </form>
+                    <button name="add_keyword" type="submit">Search</button>
             </div>
         </form>
         <!-- {% if keywords|length > 0 %} -->

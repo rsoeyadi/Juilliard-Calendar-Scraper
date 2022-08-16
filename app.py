@@ -10,7 +10,6 @@ app.secret_key = os.urandom(12)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    
     data = search_db() # get events from database
     lastUpdated = get_last_updated_time()
     keywords = get_keywords()
@@ -32,18 +31,18 @@ def remove_keyword():
     
     return index()
 
-@app.route("/add_keyword", methods=['GET', 'POST'])
+@app.route("/add_keyword", methods=['POST'])
 def add_keyword():
     if request.method == 'POST':
         keywords = get_keywords()
-        keyword = request.form.get('add_keyword', False)
+        kw = request.form.get("q", False)
 
-        for keyword in keywords:
-            if keyword not in session['keywords']:
-                session['keywords'].append(keyword)
-
-        session['keywords'] = keywords
+        if kw not in keywords:
+            keywords.append(kw)
+            session['keywords'] = keywords
+    
     return index()
+
 
 def get_last_updated_time():
     # get last modified time of database
@@ -66,20 +65,15 @@ def get_last_updated_time():
 def search_db():
     keywords = get_keywords()
     db = getattr(g, '_database', None)
-    q = request.args.get('q')
 
     if db is None:
         db = g._database = sqlite3.connect('./juilliard.db')
     cursor = db.cursor()
 
-    if q and q not in keywords:
-        keywords.append(q)
-        session['keywords'] = keywords
-
     qs = []
     query = "SELECT * FROM events WHERE(yyyymmdd >= {}) "
 
-    if q or keywords:
+    if keywords:
         for i in range(len(keywords)):
             query += "AND ((title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') or (day_of_week LIKE '%{}%')) "
             for _ in range(8):
