@@ -28,6 +28,7 @@ def add_keyword():
 
         for kw in curr_list:
             if kw:
+                kw = kw.lower()
                 if kw not in keywords:
                     keywords.append(kw)
                     session['keywords'] = keywords
