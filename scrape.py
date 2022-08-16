@@ -5,7 +5,7 @@ from time import sleep
 from datetime import datetime
 
 class Event:
-    def __init__(self, unique_id, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd):
+    def __init__(self, unique_id, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd, link):
         self.unique_id = unique_id
         self.date_time = date_time
         self.title = title.strip()
@@ -18,6 +18,7 @@ class Event:
         self.time2 = time2
         self.day_of_week = day_of_week
         self.yyyymmdd = yyyymmdd
+        self.link = link
         
     def __str__(self):
         return '{} | {} @ {} | {}'.format((self.date_time), self.title.strip(), self.venue.strip(), self.tags)
@@ -53,14 +54,15 @@ def get_events():
                 venue = e.find('div', {'class': 'field--name-field-venue'}).text
                 tags = e.find('div', {'class': 'field--name-field-event-tags'}).text.split('\n')
                 yyyymmdd = date_time.strftime('%Y%m%d') 
-                
+                link = "http://juilliard.edu" + e.find(
+                    'div', {'class': 'field--name-field-event-purchase-url'}).find('a')['href']
                 while '' in tags:
                     tags.remove('')
                 
                 tags = ",".join(tags)
 
                 unique_id = my_hash(title + str(date_time))
-                event = Event(unique_id, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd)
+                event = Event(unique_id, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd, link)
                 results.append(event)
 
         curr_page += 1 # increment to move on to next page
@@ -73,7 +75,7 @@ def insert_into_db(events):
     for event in events:
         conn = sqlite3.connect('juilliard.db')
         c = conn.cursor()
-        c.execute('REPLACE INTO events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (event.unique_id, event.date_time, event.title, event.venue, event.tags, event.month, event.day, event.year, event.time, event.time2, event.day_of_week, int(event.yyyymmdd)))
+        c.execute('REPLACE INTO events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (event.unique_id, event.date_time, event.title, event.venue, event.tags, event.month, event.day, event.year, event.time, event.time2, event.day_of_week, int(event.yyyymmdd), event.link))
         conn.commit()
         conn.close()
 
@@ -90,5 +92,5 @@ if __name__ == '__main__':
     conn = sqlite3.connect('juilliard.db')
     c = conn.cursor()
 
-    c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd INTEGER)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd INTEGER, link)''')
     insert_into_db(events)

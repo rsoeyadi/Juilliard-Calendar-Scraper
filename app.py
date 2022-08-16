@@ -96,7 +96,7 @@ def search_db():
         cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",(datetime.now().strftime('%Y%m%d'),))
     results = cursor.fetchall()
     
-    results = [(str(event[3]), str(event[1]), str(event[2]), str(event[4])) for event in results]
+    results = [(str(event[3]), str(event[1]), str(event[2]), str(event[4]), str(event[12])) for event in results]
 
     if not results:
         return

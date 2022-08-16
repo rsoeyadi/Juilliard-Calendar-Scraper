@@ -74,6 +74,10 @@ hr {
     border-radius: 0.5em;
 }
 
+.event-link {
+    text-decoration: none;
+}
+
 .event-title {
     font-size: 23px;      
     color: rgb(255, 255, 255);
