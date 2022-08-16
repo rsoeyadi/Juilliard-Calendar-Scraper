@@ -29,13 +29,17 @@
             <input type="search" name="q" placeholder="Search" value="{{q}}">
             {% endif %}
             <div class="button-wrapper">
-                <button type="submit">Search</button>
+                <form action="/add_keyword", method="POST">
+                    <button name="keyword" type="submit">Search</button>
+                </form>
             </div>
         </form>
         {% if keywords|length > 0 %}
-            {% for keyword in keywords %}
-            <li>{{ keyword }}</li>
-            {% endfor %}
+            <form action="/remove_keyword", method="POST">
+                {% for keyword in keywords %}
+                    <input type="submit" value="{{ keyword }}" name="remove_keyword">{{ keyword }}</input>
+                {% endfor %}
+            </form>
         {% endif %}
         <hr>
         <h1>

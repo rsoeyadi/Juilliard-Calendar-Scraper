@@ -8,13 +8,45 @@ import time
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     keywords = get_keywords()
-
     data = search_db() # get events from database
-    
-    updatedOn_time = os.path.getmtime('./juilliard.db') # get last modified time of database
+    lastUpdated = get_last_updated_time()
+    app.logger.error(session['keywords'])
+    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdated, keywords=keywords)
+   
+@app.route("/remove_keyword", methods=['GET', 'POST'])
+def remove_keyword():
+    if request.method == 'POST':
+        keywords = get_keywords()
+        kw = request.form.get('remove_keyword', False)
+
+        if kw in keywords:
+            keywords.remove(kw)
+            session['keywords'] = keywords
+            
+        app.logger.error("removing->" + kw)
+            
+        session['keywords'] = keywords
+    return index()
+
+
+@app.route("/add_keyword", methods=['GET', 'POST'])
+def add_keyword():
+    keywords = get_keywords()
+    keyword = request.form.get('keyword', False)
+
+    for keyword in keywords:
+        if keyword not in session['keywords']:
+            session['keywords'].append(keyword)
+
+    session['keywords'] = keywords
+    return index()
+
+def get_last_updated_time():
+    # get last modified time of database
+    updatedOn_time = os.path.getmtime('./juilliard.db')
     updatedOn_time = time.ctime(updatedOn_time)  # cast to datetime object
     updatedOn_time = datetime.strptime(updatedOn_time, "%a %b %d %H:%M:%S %Y")
     now = datetime.now()
@@ -27,9 +59,9 @@ def index():
         lastUpdatedTime = str(int(lastUpdatedTime)) + " hours"
     else:
         lastUpdatedTime = str(round(lastUpdatedTime)) + " minutes"
-    
-    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdatedTime, keywords=keywords)
-   
+
+    return lastUpdatedTime
+
 def search_db():
     keywords = get_keywords()
     db = getattr(g, '_database', None)
@@ -46,7 +78,7 @@ def search_db():
     qs = []
     query = "SELECT * FROM events WHERE(yyyymmdd >= {}) "
 
-    if q:
+    if q or keywords:
         for i in range(len(keywords)):
             query += "AND ((title LIKE '%{}%') OR (tags LIKE '%{}%') OR (venue LIKE '%{}%') OR (month LIKE '%{}%') OR (day LIKE '%{}%') OR (year LIKE '%{}%') OR (time LIKE '%{}%') or (day_of_week LIKE '%{}%')) "
             for _ in range(8):
