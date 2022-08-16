@@ -150,7 +150,6 @@ button[type=submit]:-webkit-details-marker {
   flex-wrap: wrap;
 }
 
-/* CSS */
 .filter-button {
   margin: 1em 0.5em 0.5em 0;
   background-color: #e4e4e4;

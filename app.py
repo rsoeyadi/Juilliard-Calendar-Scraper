@@ -15,7 +15,6 @@ def index():
     lastUpdated = get_last_updated_time()
     keywords = get_keywords()
 
-
     return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdated, keywords=keywords)
    
 @app.route("/remove_keyword", methods=['GET', 'POST'])
@@ -27,9 +26,7 @@ def remove_keyword():
         if kw in keywords:
             keywords.remove(kw)
             session['keywords'] = keywords
-            
-        app.logger.error("removing->" + kw)
-            
+                        
         session['keywords'] = keywords
         return index()
     
