@@ -1,5 +1,5 @@
 from re import L
-from flask import Flask, render_template, request, g, session
+from flask import Flask, render_template, request, g, session, redirect, url_for
 import sqlite3
 from datetime import datetime
 import os
@@ -12,9 +12,9 @@ app.secret_key = os.urandom(12)
 def index():
     session["data"] = search_db() # get events from database
     session["lastUpdated"] = get_last_updated_time()
-    session["keywords"] = get_keywords()
+    keywords = get_keywords()
 
-    return render_template("index.html", results=session["data"], q=request.args.get('q'), lastUpdatedTime=session["lastUpdated"], keywords=session["keywords"])
+    return render_template("index.html", results=session["data"], q=request.args.get('q'), lastUpdatedTime=session["lastUpdated"], keywords=keywords)
    
 
 @app.route("/add_keyword", methods=['POST'])
@@ -23,11 +23,12 @@ def add_keyword():
         keywords = get_keywords()
         kw = request.form.get("q", False)
 
-        if kw not in keywords:
-            keywords.append(kw)
-            session['keywords'] = keywords
-        session.modified = True
-    return index()
+        if kw:
+            if kw not in keywords:
+                keywords.append(kw)
+                session['keywords'] = keywords
+            session.modified = True
+    return redirect(url_for('index'))
 
 @app.route("/remove_keyword", methods=['POST'])
 def remove_keyword():
@@ -42,7 +43,7 @@ def remove_keyword():
         session['keywords'] = keywords
         session.modified = True
     
-    return index()
+    return redirect(url_for('index'))
 
 def get_last_updated_time():
     # get last modified time of database
@@ -80,7 +81,6 @@ def search_db():
                 if keywords[i] and keywords[i] != '':
                     qs.append(keywords[i])
         query += ("ORDER BY date_time ASC")
-        currTime = datetime.now().strftime('%Y%m%d')
         cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs,))
     else:
         cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",(datetime.now().strftime('%Y%m%d'),))
