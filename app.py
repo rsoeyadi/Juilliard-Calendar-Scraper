@@ -87,6 +87,8 @@ def get_last_updated_time():
     app.logger.error("lastUpdatedTime: {}".format(lastUpdatedTime))
 
     lastUpdatedTime = now - lastUpdatedTime
+    app.logger.error("AFTER SUBTRACTION: {}".format(lastUpdatedTime))
+
     # convert to minutes
     lastUpdatedTime = lastUpdatedTime.seconds / 60
 
