@@ -15,7 +15,12 @@ def index():
     lastUpdated = get_last_updated_time()
     keywords = get_keywords()
 
-    return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdated, keywords=keywords)
+    return render_template(
+        "index.html",
+        results=data,
+        q=request.args.get('q'),
+        lastUpdatedTime=lastUpdated,
+        keywords=keywords)
 
 
 @app.route("/add_keyword", methods=['POST'])
@@ -102,8 +107,10 @@ def search_db():
         query += ("ORDER BY date_time ASC")
         cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs,))
     else:
-        cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",
-                       (datetime.now().strftime('%Y%m%d'),))
+        cursor.execute(
+            "SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",
+            (datetime.now().strftime('%Y%m%d'),
+             ))
     results = cursor.fetchall()
 
     results = [(str(event[3]), str(event[1]), str(event[2]),
@@ -131,7 +138,8 @@ def close_connection(exception):
 def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
     if not value:
         return
-    return (datetime.strptime(value, format)).strftime('%a, %B %d, %Y at %-I:%M%p')
+    return (datetime.strptime(value, format)).strftime(
+        '%a, %B %d, %Y at %-I:%M%p')
 
 
 @app.context_processor
