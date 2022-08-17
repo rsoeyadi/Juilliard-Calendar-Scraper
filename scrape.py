@@ -70,7 +70,7 @@ def get_events():
     
     return results
 
-def insert_into_db(events):
+def insert_events_into_db(events):
     for event in events:
         conn = sqlite3.connect('juilliard.db')
         c = conn.cursor()
@@ -78,6 +78,13 @@ def insert_into_db(events):
         conn.commit()
         conn.close()
 
+def insert_current_time_into_db():
+    conn = sqlite3.connect('juilliard.db')
+    c = conn.cursor()
+    c.execute('REPLACE INTO extras VALUES (?, ?)', ("juilliard.db", datetime.now(),))
+    conn.commit()
+    conn.close()
+    
 def my_hash(s):
     h = 0
     for c in s:
@@ -92,4 +99,7 @@ if __name__ == '__main__':
     c = conn.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd INTEGER, link)''')
-    insert_into_db(events)
+    c.execute('''CREATE TABLE IF NOT EXISTS extras (filename, current_time)''')
+    
+    insert_current_time_into_db()
+    insert_events_into_db(events)
