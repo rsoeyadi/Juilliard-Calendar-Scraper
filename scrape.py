@@ -99,7 +99,8 @@ if __name__ == '__main__':
     c = conn.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd INTEGER, link)''')
-    c.execute('''CREATE TABLE IF NOT EXISTS extras (filename, current_time)''')
+    c.execute(
+        '''CREATE TABLE IF NOT EXISTS extras (filename PRIMARY KEY, current_time)''')
     
     insert_current_time_into_db()
     insert_events_into_db(events)
