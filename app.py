@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, g, session, redirect, url_for
 import sqlite3
 from datetime import datetime, timezone
 import re
-import pytz
 
 app = Flask(__name__)
 app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN\xfcR87"
