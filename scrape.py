@@ -46,7 +46,7 @@ def get_events():
                 year = date_time.strftime('%Y') # for searching db by year in app
                 time = date_time.strftime('%I:%M%p') # for searching db by time in app
                 time2 = date_time.strftime('%I:%M%p')
-                if ":00" in time2: 
+                if ":00" in time2:
                     time2 = time2.replace(":00", "")
                 day_of_week = date_time.strftime('%A') # for searching db by day of week in app
                 title = e.find('div', {'class': 'title-subtitle'}).text
@@ -78,7 +78,7 @@ def insert_into_db(events):
         conn.commit()
         conn.close()
 
-def my_hash(s): 
+def my_hash(s):
     h = 0
     for c in s:
         h = (h * 31 + ord(c)) & 0xFFFFFFFF

@@ -58,7 +58,6 @@ hr {
 
 #events-header {
   position: relative;
-  position: relative;
   display: inline-block;
   color: rgb(0 0 0);
   text-transform: uppercase;
@@ -119,8 +118,6 @@ button[type="submit"] {
   position: relative;
   transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
   user-select: none;
-  user-select: none;
-  appearance: none !important;
   touch-action: manipulation;
   vertical-align: middle;
   white-space: nowrap;
@@ -164,7 +161,6 @@ button[type="submit"]:-webkit-details-marker {
 }
 
 .filter-button {
-  appearance: none !important;
   margin: 1em 0.5em 0.5em 0;
   background-color: #e4e4e4;
   border: 0;
