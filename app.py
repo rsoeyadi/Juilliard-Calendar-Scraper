@@ -81,8 +81,8 @@ def get_last_updated_time():
     lastUpdatedTime = datetime.strptime(lastUpdatedTime, '%Y-%m-%d %H:%M:%S.%f')
 
     now = datetime.now(timezone.utc)
-    # lastUpdatedTime = lastUpdatedTime.astimezone(pytz.timezone('utc'))
-
+    lastUpdatedTime = lastUpdatedTime.astimezone(pytz.timezone('utc'))
+    
     app.logger.error("now: {}".format(now))
     app.logger.error("lastUpdatedTime: {}".format(lastUpdatedTime))
 
