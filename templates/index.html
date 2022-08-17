@@ -1,93 +1,84 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Juilcal | Keyword Search</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-</head>
-
-<body>
-    <div class="wrapper">
-        <div id="intro">
-            <h1>Juilcal</h1>
-            <p>last updated {{ lastUpdatedTime }} ago</p>
-            <p>
-                Search the Juilliard performances calendar by case-insensitive keyword(s) (ex. "chamber music", "october",
-                "7:00", "wED 1pm"). Filters are added upon each search query. Leave the search bar blank with no filters to see all events.
-            </p>
-            <p>
-                Click an event to view more information on the Juilliard website. 
-            </p>
-            <p>
-                The results are taken directly from Juilliard's website and updated every day. Performance times are
-                based on EST.
-            </p>
-        </div>
-        <form action="/add_keyword" , method="POST">
-            {% if not q %}
-            <input type="search" name="q" placeholder="Add Filter">
-            {% else %}
-            <input type="search" name="q" placeholder="Add Filter" value="{{q}}">
-            {% endif %}
-            <div class="button-wrapper">
-                    <button name="add_keyword" type="submit">Submit</button>
+    <head>
+        <title>Juilcal | Keyword Search</title>
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/main.css') }}">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div id="intro">
+                <h1>Juilcal</h1>
+                <p>last updated {{ lastUpdatedTime }} ago</p>
+                <p>
+                    Search the Juilliard performances calendar by case-insensitive keyword(s) (ex. "chamber music", "october",
+                    "7:00", "wED 1pm"). Filters are added upon each search query. Leave the search bar blank with no filters to see all events.
+                </p>
+                <p>Click an event to view more information on the Juilliard website.</p>
+                <p>
+                    The results are taken directly from Juilliard's website and updated every day. Performance times are
+                    based on EST.
+                </p>
             </div>
-        </form>
-        <!-- {% if keywords|length > 0 %} -->
-        <hr>
-        <form action="/clear_all_filters" , method="POST">
-            <input type="submit" value="clear filters" name="clear_all_filters" id="clear-filters-button"></input>
+            <form action="/add_keyword" , method="POST">
+                {% if not q %}
+                    <input type="search" name="q" placeholder="Add Filter">
+                {% else %}
+                    <input type="search" name="q" placeholder="Add Filter" value="{{q}}">
+                {% endif %}
+                <div class="button-wrapper">
+                    <button name="add_keyword" type="submit">Submit</button>
+                </div>
+            </form>
+            <!-- {% if keywords|length > 0 %} -->
+            <hr>
+            <form action="/clear_all_filters" , method="POST">
+                <input type="submit"
+                       value="clear filters"
+                       name="clear_all_filters"
+                       id="clear-filters-button">
+            </input>
         </form>
         <div class="filters-wrapper">
-            
-        {% for keyword in keywords %}
-            <form action="/remove_keyword", method="POST">
-                        <input type="submit" value="{{ keyword }}" name="remove_keyword" class="filter-button"></input>
+            {% for keyword in keywords %}
+                <form action="/remove_keyword", method="POST">
+                    <input type="submit"
+                           value="{{ keyword }}"
+                           name="remove_keyword"
+                           class="filter-button">
+                </input>
             </form>
         {% endfor %}
-        </div>
-        <!-- {% endif %} -->
-        <hr>
-        <h1>
-            Search Results
-        </h1>
-        <div class="results">
-            <h1 id="events-header">
-                {{ now.year }} - {{ now.year + 1 }} 
-            </h1>
-            {% if not results %}
+    </div>
+    <!-- {% endif %} -->
+    <hr>
+    <h1>Search Results</h1>
+    <div class="results">
+        <h1 id="events-header">{{ now.year }} - {{ now.year + 1 }}</h1>
+        {% if not results %}
             <p>No results found.</p>
-            {% else %}
+        {% else %}
             <ul>
                 {% for result in results %}
-
-                <li>
-                    <div class="event-wrapper">
-                        <ul class="event" data-aos="fade-up" data-aos-offset="-50">
-                            <a class="event-link" href="{{ result[4]}}">
-                                <li class="event-title">
-                                    {{ result[2]}}
-                                </li>
-                                <li class="event-date">
-                                    {{ result[1]|datetimeformat}}
-                                </li>
-                            </a>
-                        </ul>
-                    </div>
-                </li>
+                    <li>
+                        <div class="event-wrapper">
+                            <ul class="event" data-aos="fade-up" data-aos-offset="-50">
+                                <a class="event-link" href="{{ result[4] }}">
+                                    <li class="event-title">{{ result[2] }}</li>
+                                    <li class="event-date">{{ result[1]|datetimeformat }}</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </li>
                 {% endfor %}
             </ul>
-            {% endif %}
-        </div>
+        {% endif %}
     </div>
+</div>
 </body>
-
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
+<script>AOS.init();</script>
 </html>
