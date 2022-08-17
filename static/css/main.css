@@ -115,7 +115,8 @@ button[type="submit"] {
   color: #24292e;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 1.3em;
   font-weight: 500;
   line-height: 20px;
@@ -169,7 +170,7 @@ button[type="submit"]:-webkit-details-marker {
 .filter-button {
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;  
+  appearance: none;
   margin: 1em 0.5em 0.5em 0;
   background-color: #e4e4e4;
   border: 0;
@@ -229,7 +230,9 @@ button[type="submit"]:-webkit-details-marker {
   padding-right: 20px;
   text-align: center;
   touch-action: manipulation;
-  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+    box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+    color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   user-select: none;
   user-select: none;
   vertical-align: middle;
