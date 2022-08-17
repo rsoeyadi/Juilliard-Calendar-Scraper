@@ -3,6 +3,7 @@ import sqlite3
 from datetime import datetime
 import os
 import time
+import re
 
 app = Flask(__name__)
 app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN\xfcR87"
@@ -26,12 +27,13 @@ def add_keyword():
         curr_list = kw.split(" ")
 
         for kw in curr_list:
-            if kw:
+            kw = re.sub(r'\W+', '', kw) # regex to remove non-alphanumeric characters
+            if kw: # if sanitized keyword is not empty
                 kw = kw.lower()
-                if kw not in keywords:
+                if kw not in keywords: 
                     keywords.append(kw)
                     session['keywords'] = keywords
-                session.modified = True
+                session.modified = True 
 
     return redirect(url_for('index'))
 
@@ -59,6 +61,7 @@ def get_last_updated_time():
     updatedOn_time = os.path.getmtime('./juilliard.db')
     updatedOn_time = time.ctime(updatedOn_time)  # cast to datetime object
     updatedOn_time = datetime.strptime(updatedOn_time, "%a %b %d %H:%M:%S %Y")
+
     now = datetime.now()
     lastUpdatedTime = now - updatedOn_time
     # convert to minutes
@@ -117,7 +120,7 @@ def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
     if not value: 
         return 
     return (datetime.strptime(value, format)).strftime('%a, %B %d, %Y at %-I:%M%p')
-    
+
 @app.context_processor
 def inject_now():
     return {'now': datetime.utcnow()}
