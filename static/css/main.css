@@ -31,7 +31,6 @@ li {
     font-weight: 500;     
     letter-spacing: 1px; 
     border-bottom: double rgb(255, 255, 255);
-    font-size: 2em;
 }
 
 #intro p {
@@ -76,7 +75,7 @@ hr {
 .event {
     margin-top: 1.3em;
     background-color: #2D71B5;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 1em;
     border-radius: 0.5em;
 }
