@@ -88,7 +88,10 @@ def get_last_updated_time():
     lastUpdatedTime = lastUpdatedTime.seconds / 60
     if lastUpdatedTime > 60: # if last updated time is greater than 1 hour
         lastUpdatedTime = lastUpdatedTime / 60
-        lastUpdatedTime = str(int(lastUpdatedTime)) + " hours"
+        lastUpdatedTime = round(lastUpdatedTime)
+
+        lastUpdatedTime = str(
+            lastUpdatedTime) + " hour" if lastUpdatedTime == 1 else str(lastUpdatedTime) + " hours"
     else:
         lastUpdatedTime = round(lastUpdatedTime)
 
