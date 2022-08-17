@@ -80,9 +80,7 @@ def get_last_updated_time():
     # convert to datetime object
     lastUpdatedTime = datetime.strptime(lastUpdatedTime, '%Y-%m-%d %H:%M:%S.%f')
 
-    now = datetime.now(timezone.utc)
-    lastUpdatedTime = lastUpdatedTime.replace(
-        tzinfo=timezone.utc).astimezone(tz=None)
+    now = datetime.now()
 
     app.logger.error("now: {}".format(now))
     app.logger.error("lastUpdatedTime: {}".format(lastUpdatedTime))
