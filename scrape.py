@@ -81,7 +81,7 @@ def insert_events_into_db(events):
 def insert_current_time_into_db():
     conn = sqlite3.connect('juilliard.db')
     c = conn.cursor()
-    c.execute('REPLACE INTO extras VALUES (?, ?)', ("juilliard.db", datetime.now(),))
+    c.execute('REPLACE INTO extras VALUES (?, ?)', ("juilliard.db", datetime.utcnow(),))
     conn.commit()
     conn.close()
     
