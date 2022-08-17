@@ -44,8 +44,8 @@
     <body>
         <div class="wrapper">
             <div id="intro">
-                <h1>Juilcal</h1>
-                <p>last updated {{ lastUpdatedTime }} ago</p>
+                <h1>Juilcal | {{ now.year }} - {{ now.year + 1 }}</h1>
+                <p id="last-updated-text">last updated {{ lastUpdatedTime }} ago</p>
                 <p>
                     Search the Juilliard performances calendar by case-insensitive keyword(s) (ex. "chamber music", "october",
                     "7:00", "wED 1pm"). Filters are added upon each search query. Leave the search bar blank with no filters to see all events.
@@ -56,6 +56,7 @@
                     based on EST.
                 </p>
             </div>
+
             <form action="/add_keyword" , method="POST">
                 {% if not q %}
                     <input type="search" name="q" placeholder="Add Filter">
@@ -90,7 +91,6 @@
     <hr>
     <h1>Search Results</h1>
     <div class="results">
-        <h1 id="events-header">{{ now.year }} - {{ now.year + 1 }}</h1>
         {% if not results %}
             <p>No results found.</p>
         {% else %}
