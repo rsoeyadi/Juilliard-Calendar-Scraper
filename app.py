@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, g, session, redirect, url_for
 import sqlite3
 from datetime import datetime, timezone
-import os
-import time
 import re
+import pytz
 
 app = Flask(__name__)
 app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN\xfcR87"
@@ -70,8 +69,6 @@ def clear_all_filters():
 def get_last_updated_time():
     db = getattr(g, '_database', None)
 
-    est = pytz.timezone('US/Eastern')
-
     # get last modified time of database
     if db is None:
         db = g._database = sqlite3.connect('./juilliard.db')
@@ -83,9 +80,11 @@ def get_last_updated_time():
     # convert to datetime object
     lastUpdatedTime = datetime.strptime(lastUpdatedTime, '%Y-%m-%d %H:%M:%S.%f')
 
-    now = datetime.now()
-    now = now.replace(tzinfo=est) # Heroku is UTC
-    lastUpdatedTime = lastUpdatedTime.replace(tzinfo=est) 
+    now = datetime.now(timezone.utc)
+    lastUpdatedTime = lastUpdatedTime.astimezone(pytz.timezone('utc'))
+
+    app.logger.error("now: {}".format(now))
+    app.logger.error("lastUpdatedTime: {}".format(lastUpdatedTime))
 
     lastUpdatedTime = now - lastUpdatedTime
     # convert to minutes
