@@ -8,34 +8,38 @@ import re
 app = Flask(__name__)
 app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN\xfcR87"
 
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    data = search_db() # get events from database
+    data = search_db()  # get events from database
     lastUpdated = get_last_updated_time()
     keywords = get_keywords()
 
     return render_template("index.html", results=data, q=request.args.get('q'), lastUpdatedTime=lastUpdated, keywords=keywords)
+
 
 @app.route("/add_keyword", methods=['POST'])
 def add_keyword():
     if request.method == 'POST':
         keywords = get_keywords()
         kw = request.form.get("q", False)
-        kw = kw.strip() # remove whitespace
+        kw = kw.strip()  # remove whitespace
 
         # split keywords by spaces
         curr_list = kw.split(" ")
 
         for kw in curr_list:
-            kw = re.sub(r'\W+', '', kw) # regex to remove non-alphanumeric characters
-            if kw: # if sanitized keyword is not empty
+            # regex to remove non-alphanumeric characters
+            kw = re.sub(r'\W+', '', kw)
+            if kw:  # if sanitized keyword is not empty
                 kw = kw.lower()
-                if kw not in keywords: 
+                if kw not in keywords:
                     keywords.append(kw)
                     session['keywords'] = keywords
-                session.modified = True 
+                session.modified = True
 
     return redirect(url_for('index'))
+
 
 @app.route("/remove_keyword", methods=['POST'])
 def remove_keyword():
@@ -49,12 +53,14 @@ def remove_keyword():
         session.modified = True
     return redirect(url_for('index'))
 
+
 @app.route("/clear_all_filters", methods=['POST'])
 def clear_all_filters():
     if request.method == 'POST':
         session['keywords'] = []
         session.modified = True
     return redirect(url_for('index'))
+
 
 def get_last_updated_time():
     # get last modified time of database
@@ -74,6 +80,7 @@ def get_last_updated_time():
         lastUpdatedTime = str(round(lastUpdatedTime)) + " minutes"
 
     return lastUpdatedTime
+
 
 def search_db():
     keywords = get_keywords()
@@ -95,19 +102,23 @@ def search_db():
         query += ("ORDER BY date_time ASC")
         cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs,))
     else:
-        cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",(datetime.now().strftime('%Y%m%d'),))
+        cursor.execute("SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",
+                       (datetime.now().strftime('%Y%m%d'),))
     results = cursor.fetchall()
-    
-    results = [(str(event[3]), str(event[1]), str(event[2]), str(event[4]), str(event[12])) for event in results]
+
+    results = [(str(event[3]), str(event[1]), str(event[2]),
+                str(event[4]), str(event[12])) for event in results]
 
     if not results:
         return
     return results
 
+
 def get_keywords():
     if not session.get('keywords'):
         session['keywords'] = []
     return session['keywords']
+
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -115,15 +126,18 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
+
 @app.template_filter('datetimeformat')
 def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
-    if not value: 
-        return 
+    if not value:
+        return
     return (datetime.strptime(value, format)).strftime('%a, %B %d, %Y at %-I:%M%p')
+
 
 @app.context_processor
 def inject_now():
     return {'now': datetime.utcnow()}
-    
+
+
 if __name__ == '__main__':
     app.run()
