@@ -90,7 +90,9 @@ def get_last_updated_time():
         lastUpdatedTime = lastUpdatedTime / 60
         lastUpdatedTime = str(int(lastUpdatedTime)) + " hours"
     else:
-        lastUpdatedTime = str(round(lastUpdatedTime)) + " minutes"
+        lastUpdatedTime = round(lastUpdatedTime)
+
+        lastUpdatedTime = str(lastUpdatedTime) + " minute" if lastUpdatedTime == 1 else str(lastUpdatedTime) + " minutes"
 
     return lastUpdatedTime
 
