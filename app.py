@@ -82,15 +82,10 @@ def get_last_updated_time():
 
     now = datetime.now()
 
-    app.logger.error("now: {}".format(now))
-    app.logger.error("lastUpdatedTime: {}".format(lastUpdatedTime))
-
     lastUpdatedTime = now - lastUpdatedTime
-    app.logger.error("AFTER SUBTRACTION: {}".format(lastUpdatedTime))
 
     # convert to minutes
     lastUpdatedTime = lastUpdatedTime.seconds / 60
-
     if lastUpdatedTime > 60: # if last updated time is greater than 1 hour
         lastUpdatedTime = lastUpdatedTime / 60
         lastUpdatedTime = str(int(lastUpdatedTime)) + " hours"
