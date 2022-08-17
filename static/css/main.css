@@ -101,6 +101,7 @@ hr {
 
 button[type="submit"] {
   -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   background-color: #fafbfc;
   border: 1px solid rgb(27 31 35 / 15%);
@@ -163,6 +164,8 @@ button[type="submit"]:-webkit-details-marker {
 
 .filter-button {
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;  
   margin: 1em 0.5em 0.5em 0;
   background-color: #e4e4e4;
   border: 0;
