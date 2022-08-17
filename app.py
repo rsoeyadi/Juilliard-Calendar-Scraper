@@ -68,17 +68,26 @@ def clear_all_filters():
 
 
 def get_last_updated_time():
+    db = getattr(g, '_database', None)
+
     # get last modified time of database
-    updatedOn_time = os.path.getmtime('./juilliard.db')
-    updatedOn_time = time.ctime(updatedOn_time)  # cast to datetime object
-    updatedOn_time = datetime.strptime(updatedOn_time, "%a %b %d %H:%M:%S %Y")
+    if db is None:
+        db = g._database = sqlite3.connect('./juilliard.db')
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM extras")
+    results = (cursor.fetchall())
+    lastUpdatedTime = results[0][1]
+
+    # convert to datetime object
+    lastUpdatedTime = datetime.strptime(lastUpdatedTime, '%Y-%m-%d %H:%M:%S.%f')
 
     now = datetime.now()
-    lastUpdatedTime = now - updatedOn_time
+    lastUpdatedTime = now - lastUpdatedTime
+
     # convert to minutes
     lastUpdatedTime = lastUpdatedTime.seconds / 60
 
-    if lastUpdatedTime > 60:
+    if lastUpdatedTime > 60: # if last updated time is greater than 1 hour
         lastUpdatedTime = lastUpdatedTime / 60
         lastUpdatedTime = str(int(lastUpdatedTime)) + " hours"
     else:
