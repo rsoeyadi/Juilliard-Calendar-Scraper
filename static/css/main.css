@@ -5,8 +5,11 @@
   color: #000;
 }
 
+html {
+  font-family: 'Montserrat', sans-serif;
+}
+
 h1 {
-  font-family: "Helvetica Neue", sans-serif;
   font-weight: 300;
 }
 
@@ -99,7 +102,7 @@ hr {
 }
 
 .event-title {
-  font-size: 23px;
+  font-size: 20px;
   color: rgb(255 255 255);
 }
 
