@@ -81,8 +81,13 @@ hr {
   margin-top: 1.3em;
   background-color: #2d71b5;
   box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
-  padding: 1.5em;
+  padding: 1em;
   border-radius: 0.5em;
+  line-height: 1.5em;
+}
+
+.event hr {
+  width: 30%;
 }
 
 .event-link {
@@ -94,15 +99,17 @@ hr {
   color: rgb(255 255 255);
 }
 
-.event-date {
-  color: rgb(217 217 217);
-  display: inline-block
+.event-venue-date-wrapper {
+  margin-top: 0.5em;
 }
 
 .event-venue {
-  float: right;
-  padding: 0.5em;
   color: rgb(217 217 217);
+}
+
+.event-date {
+  color: rgb(217 217 217);
+  display: inline-block
 }
 
 /* button design by Dribbble */

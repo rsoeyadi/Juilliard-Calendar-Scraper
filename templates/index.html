@@ -111,8 +111,12 @@
                             <ul class="event" data-aos="fade-up" data-aos-offset="-50">
                                 <a class="event-link" href="{{ result[4] }}" target="_blank"> 
                                     <li class="event-title">{{ result[2] }}</li>
-                                    <li class="event-date">{{ result[1]|datetimeformat }}</li>
-                                    <li class="event-venue">{{ result[0] }}</li>
+                                    <hr>
+                                    <div class="event-venue-date-wrapper">
+                                        <li class="event-venue">{{ result[0] }}</li>
+                                        <li class="event-date">{{ result[1]|datetimeformat }}</li>
+                                    </div>
+
                                 </a>
                             </ul>
                         </div>
