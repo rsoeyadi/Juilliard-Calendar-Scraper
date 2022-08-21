@@ -88,47 +88,47 @@
                        name="clear_all_filters"
                        id="clear-filters-button">
             </input>
-        </form>
-        <div class="filters-wrapper">
-            {% for keyword in keywords %}
-                <form action="/remove_keyword", method="POST">
-                    <input type="submit"
-                           value="{{ keyword }}"
-                           name="remove_keyword"
-                           class="filter-button">
-                </input>
             </form>
-        {% endfor %}
-    </div>
-    <!-- {% endif %} -->
-    <hr>
-    <h1>Search Results</h1>
-    <div class="results">
-        {% if not results %}
-            <p>No results found.</p>
-        {% else %}
-            <ul>
-                {% for result in results %}
-                    <li>
-                        <div class="event-wrapper">
-                            <ul class="event" data-aos="fade-up" data-aos-offset="-50">
-                                <a class="event-link" href="{{ result[4] }}" target="_blank"> 
-                                    <li class="event-title">{{ result[2] }}</li>
-                                    <hr>
-                                    <div class="event-venue-date-wrapper">
-                                        <li class="event-venue">{{ result[0] }}</li>
-                                        <li class="event-date">{{ result[1]|datetimeformat }}</li>
-                                    </div>
+            <div class="filters-wrapper">
+                {% for keyword in keywords %}
+                    <form action="/remove_keyword", method="POST">
+                        <input type="submit"
+                            value="{{ keyword }}"
+                            name="remove_keyword"
+                            class="filter-button">
+                    </input>
+                </form>
+            {% endfor %}
+            </div>
+            <!-- {% endif %} -->
+            <hr>
+            <h1>Search Results</h1>
+            <div class="results">
+                {% if not results %}
+                    <p>No results found.</p>
+                {% else %}
+                    <ul>
+                        {% for result in results %}
+                            <li>
+                                <div class="event-wrapper">
+                                    <ul class="event" data-aos="fade-up" data-aos-offset="-50">
+                                        <a class="event-link" href="{{ result[4] }}" target="_blank"> 
+                                            <li class="event-title">{{ result[2] }}</li>
+                                            <hr>
+                                            <div class="event-venue-date-wrapper">
+                                                <li class="event-venue">{{ result[0] }}</li>
+                                                <li class="event-date">{{ result[1]|datetimeformat }}</li>
+                                            </div>
 
-                                </a>
-                            </ul>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
-</div>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
