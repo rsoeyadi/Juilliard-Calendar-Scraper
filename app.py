@@ -77,7 +77,8 @@ def get_last_updated_time():
     lastUpdatedTime = results[0][1]
 
     # convert to datetime object
-    lastUpdatedTime = datetime.strptime(lastUpdatedTime, '%Y-%m-%d %H:%M:%S.%f')
+    lastUpdatedTime = datetime.strptime(
+        lastUpdatedTime, '%Y-%m-%d %H:%M:%S.%f')
 
     now = datetime.now()
 
@@ -85,7 +86,7 @@ def get_last_updated_time():
 
     # convert to minutes
     lastUpdatedTime = lastUpdatedTime.seconds / 60
-    if lastUpdatedTime > 60: # if last updated time is greater than 1 hour
+    if lastUpdatedTime > 60:  # if last updated time is greater than 1 hour
         lastUpdatedTime = lastUpdatedTime / 60
         lastUpdatedTime = round(lastUpdatedTime)
 
@@ -94,7 +95,8 @@ def get_last_updated_time():
     else:
         lastUpdatedTime = round(lastUpdatedTime)
 
-        lastUpdatedTime = str(lastUpdatedTime) + " minute" if lastUpdatedTime == 1 else str(lastUpdatedTime) + " minutes"
+        lastUpdatedTime = str(
+            lastUpdatedTime) + " minute" if lastUpdatedTime == 1 else str(lastUpdatedTime) + " minutes"
 
     return lastUpdatedTime
 
