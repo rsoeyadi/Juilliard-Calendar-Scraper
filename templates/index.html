@@ -148,4 +148,17 @@
     </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(window).scroll(function () { /* store position of window */
+        sessionStorage.scrollTop = $(this).scrollTop();
+    });
+
+    $(document).ready(function () {
+        if (sessionStorage.scrollTop != "undefined") {
+            $(window).scrollTop(sessionStorage.scrollTop);
+        }
+    });
+</script>
 </html>
