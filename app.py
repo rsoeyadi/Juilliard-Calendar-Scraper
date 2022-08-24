@@ -10,6 +10,10 @@ app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN
 @app.route("/", methods=['GET', 'POST'])
 def index():
     data = search_db()  # get events from database
+
+    if session.get('desc'):
+        data.reverse()
+
     if not data:  # get number of events
         numberOfEvents = 0
     else:
@@ -23,7 +27,17 @@ def index():
         q=request.args.get('q'),
         lastUpdatedTime=lastUpdated,
         keywords=keywords,
-        numberOfEvents=numberOfEvents)
+        numberOfEvents=numberOfEvents,
+        desc=session.get('desc'))
+
+@app.route("/sort", methods=['POST']) 
+def toggleDesc():
+    if request.method == 'POST':
+        if session.get('desc'):
+            session['desc'] = False
+        else:
+            session['desc'] = True
+    return redirect(url_for('index'))
 
 
 @app.route("/add_keyword", methods=['POST'])

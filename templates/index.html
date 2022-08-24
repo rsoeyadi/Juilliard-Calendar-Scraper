@@ -107,6 +107,17 @@
                     <p>{{ numberOfEvents }} event matched</p>
                 {% elif numberOfEvents > 0%}
                     <p>{{ numberOfEvents }} events matched</p>
+                    <form action="/sort" , method="POST">
+                        {% if desc %}
+                        <div class="button-wrapper">
+                            <button name="sort" type="submit">View Ascending</button>
+                        </div>
+                        {% else %} 
+                        <div class="button-wrapper">
+                            <button name="sort" type="submit">View Descending</button>
+                        </div>
+                        {% endif %}
+                    </form>
                 {% endif %}
             <div class="results">
                 {% if not results %}
