@@ -11,13 +11,12 @@ app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN
 def index():
     data = search_db()  # get events from database
 
-    if session.get('desc'):
-        data.reverse()
-
     if not data:  # get number of events
         numberOfEvents = 0
     else:
         numberOfEvents = len(data)  
+        if session.get('desc'):
+            data.reverse()
     lastUpdated = get_last_updated_time()
     keywords = get_keywords()
 
