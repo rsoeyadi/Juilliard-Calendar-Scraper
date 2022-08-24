@@ -103,6 +103,11 @@
             <!-- {% endif %} -->
             <hr>
             <h1>Search Results</h1>
+            {% if numberOfEvents == 1 %}
+                <p>{{ numberOfEvents }} event matched</p>
+            {% else %}
+                <p>{{ numberOfEvents }} events matched</p>
+            {% endif %}
             <div class="results">
                 {% if not results %}
                     <p>No results found.</p>

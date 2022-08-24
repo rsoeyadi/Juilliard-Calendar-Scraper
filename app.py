@@ -10,6 +10,10 @@ app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN
 @app.route("/", methods=['GET', 'POST'])
 def index():
     data = search_db()  # get events from database
+    if not data:  # get number of events
+        numberOfEvents = 0
+    else:
+        numberOfEvents = len(data)  
     lastUpdated = get_last_updated_time()
     keywords = get_keywords()
 
@@ -18,7 +22,8 @@ def index():
         results=data,
         q=request.args.get('q'),
         lastUpdatedTime=lastUpdated,
-        keywords=keywords)
+        keywords=keywords,
+        numberOfEvents=numberOfEvents)
 
 
 @app.route("/add_keyword", methods=['POST'])
