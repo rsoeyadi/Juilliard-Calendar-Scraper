@@ -103,13 +103,11 @@
             <!-- {% endif %} -->
             <hr>
             <h1>Search Results</h1>
-            {% if numberOfEvents > 0 %}
                 {% if numberOfEvents == 1 %}
                     <p>{{ numberOfEvents }} event matched</p>
-                {% else %}
+                {% elif numberOfEvents > 0%}
                     <p>{{ numberOfEvents }} events matched</p>
                 {% endif %}
-            {% endif %}
             <div class="results">
                 {% if not results %}
                     <p>No results found.</p>
