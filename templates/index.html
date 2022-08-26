@@ -61,7 +61,7 @@
                 <p id="last-updated-text">last updated {{ lastUpdatedTime }} ago</p>
                 <p>
                     Search the Juilliard performances calendar by case-insensitive keyword(s) (ex. "chamber music", "october",
-                    "7:00", "wED 1pm"). Filters are added upon each search query and can be removed by clicking on them individually or clicking the 'clear filters' button. Leave the search bar blank with no filters to see all events.
+                    "7:00", "wED 1pm"). Filters are added upon each search query and can be removed by clicking on them individually or clicking the 'clear search terms' button. Leave the search bar blank with no filters to see all events.
                 </p>
                 <p>Click an event to view more information on the Juilliard website.</p>
                 <p>
@@ -72,9 +72,9 @@
 
             <form action="/add_keyword" , method="POST">
                 {% if not q %}
-                    <input type="search" name="q" placeholder="Add Filter">
+                    <input type="search" name="q" placeholder="Enter search term">
                 {% else %}
-                    <input type="search" name="q" placeholder="Add Filter" value="{{q}}">
+                    <input type="search" name="q" placeholder="Enter search term" value="{{q}}">
                 {% endif %}
                 <div class="button-wrapper">
                     <button name="add_keyword" type="submit">Submit</button>
@@ -84,7 +84,7 @@
             <hr>
             <form action="/clear_all_filters" , method="POST">
                 <input type="submit"
-                       value="clear filters"
+                       value="clear search terms"
                        name="clear_all_filters"
                        id="clear-filters-button">
             </input>
