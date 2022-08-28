@@ -16,7 +16,8 @@ h1 {
 p {
   font-family: Verdana, sans-serif;
   font-size: 16px;
-  line-height: 26px;
+  line-height: 27.5px;
+  margin-bottom: 1em;
 }
 
 li {
@@ -227,7 +228,7 @@ button[type="submit"]:-webkit-details-marker {
   box-shadow: none;
 }
 
-#clear-filters-button {
+#clear-filters-button, #clear-filters-button-fake {
   appearance: none !important;
   margin: 0 0 0.5em;
   align-items: center;
@@ -274,4 +275,10 @@ button[type="submit"]:-webkit-details-marker {
   cursor: not-allowed;
   background: rgb(0 0 0 / 8%);
   color: rgb(0 0 0 / 30%);
+}
+
+#clear-filters-button-fake {
+  margin: 0;
+  /* get rid of pointer events on the fake button */
+  pointer-events: none;
 }
