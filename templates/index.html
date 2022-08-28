@@ -94,9 +94,9 @@
         </div>
         <form action="/add_keyword" , method="POST">
             {% if not q %}
-                <input type="search" name="q" placeholder="Instruments, Performers, Times...">
+                <input type="search" name="q" placeholder="Try Performers, Times, and More">
             {% else %}
-                <input type="search" name="q" placeholder="Instruments, Performers, Times..." value="{{q}}">
+                <input type="search" name="q" placeholder="Try Performers, Times, and More" value="{{q}}">
             {% endif %}
             <div class="button-wrapper">
                 <button name="add_keyword" type="submit">Submit</button>

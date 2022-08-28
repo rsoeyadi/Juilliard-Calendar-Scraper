@@ -53,10 +53,10 @@ input[type="search"] {
   margin-top: 1em;
   border: none;
   border-radius: 30px;
-  box-shadow: rgb(0 0 0 / 55%) 0 5px 15px;
+  box-shadow: rgb(0 0 0 / 55%) 0 6px 18px;
   background-color: #e4e4e4;
-  font-size: 15.2px;
-  padding: 0 20px;
+  font-size: 1em;
+  padding: 17px 0 17px 18px;
   outline: none;
 }
 
