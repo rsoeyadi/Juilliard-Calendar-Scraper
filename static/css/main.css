@@ -279,6 +279,5 @@ button[type="submit"]:-webkit-details-marker {
 
 #clear-filters-button-fake {
   margin: 0;
-  /* get rid of pointer events on the fake button */
   pointer-events: none;
 }
