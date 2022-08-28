@@ -280,4 +280,6 @@ button[type="submit"]:-webkit-details-marker {
 #clear-filters-button-fake {
   margin: 0;
   pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
