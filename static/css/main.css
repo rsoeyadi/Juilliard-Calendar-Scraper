@@ -39,6 +39,8 @@ li {
 
 #intro p {
   margin-top: 1em;
+  line-height: 30px;
+  
 }
 
 #last-updated-text {
