@@ -51,7 +51,7 @@ def add_keyword():
 
         for kw in curr_list:
             # regex to remove special characters except colon
-            kw = re.sub(r'[^a-zA-Z0-9:]+', '', kw)
+            kw = re.sub(r'[^a-zA-Z0-9:-]+', '', kw)
             if kw:  # if sanitized keyword is not empty
                 kw = kw.lower()
                 if kw not in keywords:
