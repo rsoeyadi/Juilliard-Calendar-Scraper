@@ -40,7 +40,6 @@ li {
 #intro p {
   margin-top: 1em;
   line-height: 30px;
-  
 }
 
 #last-updated-text {
@@ -81,10 +80,6 @@ hr {
   transition: all 0.2s ease-in-out;
 }
 
-.event-wrapper:hover {
-  transform: scale(1.05);
-}
-
 .event {
   margin-top: 1.3em;
   background-color: #2d71b5;
@@ -92,6 +87,14 @@ hr {
   padding: 1em;
   border-radius: 0.5em;
   line-height: 1.5em;
+}
+
+.event p {
+  color: #fff;
+}
+
+.event-hover {
+  display: none;
 }
 
 .event.happening-today {
@@ -110,7 +113,17 @@ hr {
   z-index: -1;
   width: calc(100% + var(--border-width) * 2);
   height: calc(100% + var(--border-width) * 2);
-  background: linear-gradient(60deg, #2d71b5, #7f49b9, #ba3c9d, #af3c3e, #366799, #316ba5, #3171b2, #2d71b5);
+  background: linear-gradient(
+    60deg,
+    #2d71b5,
+    #7f49b9,
+    #ba3c9d,
+    #af3c3e,
+    #366799,
+    #316ba5,
+    #3171b2,
+    #2d71b5
+  );
   background-size: 300% 300%;
   background-position: 0 50%;
   border-radius: calc(2 * var(--border-width));
@@ -257,7 +270,8 @@ button[type="submit"]:-webkit-details-marker {
   box-shadow: none;
 }
 
-#clear-filters-button, #clear-filters-button-fake {
+#clear-filters-button,
+#clear-filters-button-fake {
   appearance: none !important;
   margin: 0 0 0.5em;
   align-items: center;
@@ -311,4 +325,39 @@ button[type="submit"]:-webkit-details-marker {
   pointer-events: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+@media (hover: hover), (-ms-high-contrast: none) {
+  .event-wrapper:hover {
+    transform: scale(1.05);
+  }
+  .event-hover {
+    padding-right: 0.5em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    justify-content: right;
+    /* move to bottom right */
+    align-items: flex-end;
+
+    transition: opacity 0.2s, visibility 0.2s;
+    border-radius: 0.5em;
+  }
+
+  .event:hover .event-hover {
+    visibility: visible;
+    opacity: 0.8;
+  }
+
+  .event p {
+    color: #fff;
+  }
+  .event:hover p {
+    color: #fff;
+  }
 }
