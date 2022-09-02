@@ -162,6 +162,20 @@ hr {
   display: inline-block;
 }
 
+.event-date.happening-today {
+  font-size: 1.3rem;
+  word-spacing: 0.2em;
+  display: inline-block;
+  padding: 0;
+  white-space: nowrap;
+  color: transparent;
+  background-color: #E8A95B;
+  background-image: radial-gradient(ellipse farthest-corner at right bottom, white 0%, #F0BB7A 20%, #E8A95B 60%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, white 0%, #F0BB7A 50%, #DE9945 75%, #E8A95B 100%);
+  background-size: 100% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
 /* button design by Dribbble */
 .button-wrapper {
   margin-top: 2em;

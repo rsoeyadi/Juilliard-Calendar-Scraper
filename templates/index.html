@@ -167,7 +167,7 @@
                                         <div class="event-venue-date-wrapper">
                                             <li class="event-venue">{{ result[0] }}</li>
                                             {% if result[6] == true %}
-                                                <li class="event-date">Today at {{ result[5] }}!</li>
+                                                <li class="event-date happening-today">TODAY at {{ result[5] }}!</li>
                                             {% else %}
                                                 <li class="event-date">{{ result[1]|datetimeformat }}</li>
                                             {% endif %}
