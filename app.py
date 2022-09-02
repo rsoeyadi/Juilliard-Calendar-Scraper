@@ -14,7 +14,7 @@ def index():
     if not data:  # get number of events
         numberOfEvents = 0
     else:
-        numberOfEvents = len(data)  
+        numberOfEvents = len(data)
         if session.get('desc'):
             data.reverse()
     lastUpdated = get_last_updated_time()
@@ -29,7 +29,8 @@ def index():
         numberOfEvents=numberOfEvents,
         desc=session.get('desc'))
 
-@app.route("/sort", methods=['POST']) 
+
+@app.route("/sort", methods=['POST'])
 def toggleDesc():
     if request.method == 'POST':
         if session.get('desc'):
