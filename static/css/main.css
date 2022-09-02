@@ -115,13 +115,13 @@ hr {
   height: calc(100% + var(--border-width) * 2);
   background: linear-gradient(
     60deg,
-    #2d71b5,
-    #7f49b9,
-    #ba3c9d,
-    #af3c3e,
-    #366799,
-    #316ba5,
-    #3171b2,
+    #0080ff,
+    #0a85ff,
+    #0d79e4,
+    #1273d5,
+    #126cc6,
+    #1b71c8,
+    #2773bf,
     #2d71b5
   );
   background-size: 300% 300%;
