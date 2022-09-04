@@ -443,7 +443,7 @@ button[type="submit"]:-webkit-details-marker {
 
   .event:hover .event-hover {
     visibility: visible;
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   .event p {
