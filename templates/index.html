@@ -185,6 +185,8 @@
             {% endif %}
         </div>
     </div>
+    <button onclick="topFunction()" id="To-Top-Button" title="Back to top of page">Back to top</button>
+
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
@@ -198,5 +200,25 @@
             $(window).scrollTop(sessionStorage.scrollTop);
         }
     });
+</script>
+<script>
+    // source: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+        toTopButton = document.getElementById("To-Top-Button");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) {
+                toTopButton.style.display = "block";
+            } else {
+                toTopButton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
 </script>
 </html>

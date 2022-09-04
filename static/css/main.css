@@ -355,6 +355,70 @@ button[type="submit"]:-webkit-details-marker {
     0 0 150px rgb(0, 149, 255);
 }
 
+#To-Top-Button {
+  display: none; 
+  position: fixed; 
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; 
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+
+#To-Top-Button:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+#To-Top-Button:main,
+#To-Top-Button:focus {
+  user-select: auto;
+}
+
+#To-Top-Button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+#To-Top-Button:disabled {
+  cursor: auto;
+}
+
+
 @media (hover: hover), (-ms-high-contrast: none) {
   .event-wrapper:hover {
     transform: scale(1.05);
@@ -372,14 +436,15 @@ button[type="submit"]:-webkit-details-marker {
     justify-content: right;
     /* move to bottom right */
     align-items: flex-end;
-
+    background-color: #1e4d7b;
+    
     transition: opacity 0.2s, visibility 0.2s;
     border-radius: 0.5em;
   }
 
   .event:hover .event-hover {
     visibility: visible;
-    opacity: 0.8;
+    opacity: 0.9;
   }
 
   .event p {
@@ -387,5 +452,12 @@ button[type="submit"]:-webkit-details-marker {
   }
   .event:hover p {
     color: #fff;
+  }
+}
+
+@media (min-width: 1520px) {
+  #To-Top-Button {
+    bottom: 30%; /* Place the button at the bottom of the page */
+    right: 170px; /* Place the button 30px from the right */
   }
 }
