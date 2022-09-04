@@ -433,10 +433,8 @@ button[type="submit"]:-webkit-details-marker {
     opacity: 0;
     display: flex;
     justify-content: right;
-    /* move to bottom right */
     align-items: flex-end;
     background-color: #1e4d7b;
-    
     transition: opacity 0.2s, visibility 0.2s;
     border-radius: 0.5em;
   }
