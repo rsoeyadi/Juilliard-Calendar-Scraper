@@ -58,6 +58,9 @@ def get_events():
                 while '' in tags:
                     tags.remove('')
                 
+                if "Preparatory Education" in tags:
+                    tags.extend(["Precollege", "Pre-college"]) # so we can search for 'precollege' and not just 'pre-college' 
+                
                 tags = ",".join(tags)
 
                 unique_id = my_hash(title + str(date_time))
