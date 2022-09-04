@@ -369,7 +369,6 @@ button[type="submit"]:-webkit-details-marker {
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
-  display: inline-block;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: .8px;
