@@ -55,6 +55,12 @@ def add_keyword():
             kw = re.sub(r'[^a-zA-Z0-9:-]+', '', kw)
             if kw:  # if sanitized keyword is not empty
                 kw = kw.lower()
+
+                # ex. "mondays at 7:30pm" -> "monday at 7:30pm"
+                days = ["mondays", "tuesdays", "wednesdays", "thursdays", "fridays", "saturdays", "sundays"]
+                if kw in days:
+                    kw = kw[:-1]
+                    
                 if kw not in keywords:
                     keywords.append(kw)
                     session['keywords'] = keywords
