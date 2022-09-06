@@ -470,6 +470,7 @@ button[type="submit"]:-webkit-details-marker {
 #modal-heading {
   color: #2d71b5;
   margin-bottom: 1rem;
+  font-size: 2.2em;
 }
 
 .close {
