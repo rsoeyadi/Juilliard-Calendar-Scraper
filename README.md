@@ -1,10 +1,19 @@
 
-# Juilcal | Keyword Search 
+# Juilcal | Juilliard Calendar Searcher/Scraper
 
-www.juilcal.com
+This project is a result of my desire for a convenient way to find events to attend on Juilliard's 
+performance calendar. I found Juilliard's own performance calendar page lacking in terms of what it let users
+search for with their limited drop-down menu.
 
-Juilliard's own performance calendar lacks a simple and easy keyword search. 
-I wrote a web scraper to save and parse all events on the calendar using Requests and 
-Beautiful Soup in Python. Users of Juilcal are able to search through the calendar using
-multiple keywords. All events are archived and moved to /dbtrash once per day. The app is built with Flask and Jinja.
+Results are scraped every ~20 minutes from [Juilliard's page](https://www.juilliard.edu/stage-beyond/performance/calendar) to ensure that results are accurate.
+
+
+## Demo
+
+Visit www.juilcal.com to view the project!
+
+
+## Author
+
+- [@rsoeyadi](https://www.github.com/rsoeyadi)
 
