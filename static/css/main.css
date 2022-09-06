@@ -17,7 +17,7 @@ p {
   font-size: 16px;
   line-height: 27.5px;
   margin-bottom: 1em;
-  -webkit-text-size-adjust: none;
+  -webkit-text-size-adjust: 100%;
 }
 
 li {
