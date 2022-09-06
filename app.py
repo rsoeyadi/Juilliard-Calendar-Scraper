@@ -57,10 +57,11 @@ def add_keyword():
                 kw = kw.lower()
 
                 # ex. "mondays at 7:30pm" -> "monday at 7:30pm"
-                days = ["mondays", "tuesdays", "wednesdays", "thursdays", "fridays", "saturdays", "sundays"]
+                days = ["mondays", "tuesdays", "wednesdays",
+                        "thursdays", "fridays", "saturdays", "sundays"]
                 if kw in days:
                     kw = kw[:-1]
-                    
+
                 if kw not in keywords:
                     keywords.append(kw)
                     session['keywords'] = keywords

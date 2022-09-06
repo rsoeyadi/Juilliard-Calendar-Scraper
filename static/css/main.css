@@ -6,7 +6,7 @@
 }
 
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: Montserrat, sans-serif;
 }
 
 h1 {
@@ -14,7 +14,6 @@ h1 {
 }
 
 p {
-  font-family: Verdana, sans-serif;
   font-size: 16px;
   line-height: 27.5px;
   margin-bottom: 1em;
@@ -43,7 +42,7 @@ li {
 }
 
 #last-updated-text {
-  color: rgb(139, 139, 139);
+  color: rgb(139 139 139);
 }
 
 input[type="search"] {
@@ -100,12 +99,14 @@ hr {
 
 .event.happening-today {
   --border-width: 3px;
+
   position: relative;
   align-items: center;
   color: white;
   background: #222;
   border-radius: var(--border-width);
 }
+
 .event.happening-today::after {
   position: absolute;
   content: "";
@@ -170,11 +171,24 @@ hr {
   padding: 0;
   white-space: nowrap;
   color: transparent;
-  background-color: #E8A95B;
-  background-image: radial-gradient(ellipse farthest-corner at right bottom, white 0%, #F0BB7A 20%, #E8A95B 60%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, white 0%, #F0BB7A 50%, #DE9945 75%, #E8A95B 100%);
+  background-color: #e8a95b;
+  background-image: radial-gradient(
+      ellipse farthest-corner at right bottom,
+      white 0%,
+      #f0bb7a 20%,
+      #e8a95b 60%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      white 0%,
+      #f0bb7a 50%,
+      #de9945 75%,
+      #e8a95b 100%
+    );
   background-size: 100% 100%;
   background-clip: text;
-  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 /* button design by Dribbble */
@@ -183,8 +197,8 @@ hr {
 }
 
 button[type="submit"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
+  appearance: none;
   appearance: none;
   background-color: #fafbfc;
   border: 1px solid rgb(27 31 35 / 15%);
@@ -194,8 +208,6 @@ button[type="submit"] {
   color: #24292e;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 1.3em;
   font-weight: 500;
   line-height: 20px;
@@ -247,8 +259,8 @@ button[type="submit"]:-webkit-details-marker {
 }
 
 .filter-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
+  appearance: none;
   appearance: none;
   margin: 1em 0.5em 0.5em 0;
   background-color: #e4e4e4;
@@ -338,40 +350,34 @@ button[type="submit"]:-webkit-details-marker {
 #clear-filters-button-fake {
   margin: 0;
   pointer-events: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
+  appearance: none;
 }
 
 .free {
   color: #fff;
-  text-shadow:
-    0 0 5px #fff,
-    0 0 10px #fff,
-    0 0 20px #fff,
-    0 0 40px rgb(0, 149, 255),
-    0 0 80px rgb(0, 149, 255),
-    0 0 90px rgb(0, 149, 255),
-    0 0 100px rgb(0, 149, 255),
-    0 0 150px rgb(0, 149, 255);
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff,
+    0 0 40px rgb(0 149 255), 0 0 80px rgb(0 149 255), 0 0 90px rgb(0 149 255),
+    0 0 100px rgb(0 149 255), 0 0 150px rgb(0 149 255);
 }
 
 #To-Top-Button {
-  display: none; 
-  position: fixed; 
+  display: none;
+  position: fixed;
   bottom: 20px; /* Place the button at the bottom of the page */
   right: 30px; /* Place the button 30px from the right */
-  z-index: 99; 
+  z-index: 99;
   appearance: button;
-  background-color: #1899D6;
+  background-color: #1899d6;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #fff;
   cursor: pointer;
   font-size: 15px;
   font-weight: 700;
-  letter-spacing: .8px;
+  letter-spacing: 0.8px;
   line-height: 20px;
   margin: 0;
   outline: none;
@@ -381,16 +387,19 @@ button[type="submit"]:-webkit-details-marker {
   text-transform: uppercase;
   touch-action: manipulation;
   transform: translateZ(0);
-  transition: filter .2s;
+  transition: filter 0.2s;
   user-select: none;
-  -webkit-user-select: none;
+  user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+  box-shadow: rgb(0 0 0 / 25%) 0 54px 55px, rgb(0 0 0 / 12%) 0 -12px 30px,
+    rgb(0 0 0 / 12%) 0 4px 6px, rgb(0 0 0 / 17%) 0 12px 13px,
+    rgb(0 0 0 / 9%) 0 -3px 5px;
+}
 
-#To-Top-Button:after {
+#To-Top-Button::after {
   background-clip: padding-box;
-  background-color: #1CB0F6;
+  background-color: #1cb0f6;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -410,18 +419,93 @@ button[type="submit"]:-webkit-details-marker {
 
 #To-Top-Button:hover:not(:disabled) {
   filter: brightness(1.1);
-  -webkit-filter: brightness(1.1);
+  filter: brightness(1.1);
 }
 
 #To-Top-Button:disabled {
   cursor: auto;
 }
 
+#why-button {
+  margin-top: 1em;
+  align-items: center;
+  background-color: #2d71b5;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+    box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+    color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  user-select: none;
+  vertical-align: middle;
+}
+
+#why-button:disabled {
+  cursor: not-allowed;
+  background: rgb(0 0 0 / 8%);
+  color: rgb(0 0 0 / 30%);
+}
+
+#modal-heading {
+  color: #2d71b5;
+  margin-bottom: 1rem;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: 0.05s;
+}
+
+.close::before,
+.close::after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 4px;
+  background-color: rgb(0 0 0);
+}
+
+.close::before {
+  transform: rotate(45deg);
+}
+
+.close::after {
+  transform: rotate(-45deg);
+}
 
 @media (hover: hover), (-ms-high-contrast: none) {
   .event-wrapper:hover {
     transform: scale(1.05);
   }
+
   .event-hover {
     padding-right: 0.5em;
     position: absolute;
@@ -447,8 +531,24 @@ button[type="submit"]:-webkit-details-marker {
   .event p {
     color: #fff;
   }
+
   .event:hover p {
     color: #fff;
+  }
+
+  .close:hover {
+    opacity: 0.3;
+  }
+
+  #why-button:hover,
+  #why-button:focus {
+    background-color: #16437e;
+    color: #fff;
+  }
+
+  #why-button:active {
+    background: #09223b;
+    color: rgb(255 255 255 / 70%);
   }
 }
 
