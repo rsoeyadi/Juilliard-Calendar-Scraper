@@ -59,9 +59,13 @@ def get_events():
                 while '' in tags:
                     tags.remove('')
                 
-                if "Preparatory Education" in tags:
-                    tags.extend(["Precollege", "Pre-college"]) # so we can search for 'precollege' and not just 'pre-college' 
-                
+                if '-' in title:
+                    hyphenated_words = [
+                        word for word in title.split() if '-' in word]
+                    if hyphenated_words:
+                        for word in hyphenated_words:
+                            tags.extend([word, word.replace('-', '')])
+
                 tags = ",".join(tags)
 
                 unique_id = my_hash(title + str(date_time))
