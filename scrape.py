@@ -56,8 +56,6 @@ def get_events():
                 yyyymmdd = date_time.strftime('%Y%m%d') 
                 link = "http://juilliard.edu" + e.find(
                     'div', {'class': 'field--name-field-event-purchase-url'}).find('a')['href']
-                while '' in tags:
-                    tags.remove('')
                 
                 if '-' in title:
                     hyphenated_words = [
@@ -67,9 +65,13 @@ def get_events():
                             tags.extend([word, word.replace('-', '')])
 
                 standard_date_format = date_time.strftime('%m/%d/%Y') # ex. 1/01/2022
-                standard_date_format_without_leading_zero_in_day = date_time.strftime('%m/%-d/%Y') # ex. 1/1/2022
-                tags.extend(
-                    [standard_date_format, standard_date_format[:6] + standard_date_format[8:], standard_date_format_without_leading_zero_in_day])
+                tags.extend( # different date forms, ex. 1/1/22, 1/01/22, etc.
+                    [standard_date_format, standard_date_format[:6] + standard_date_format[8:], date_time.strftime(
+                        '%m/%-d/%Y'), standard_date_format[:3] + standard_date_format[4:6] + standard_date_format[8:] if standard_date_format[3] == '0' else ''])
+                
+                while '' in tags:
+                    tags.remove('')
+
                 tags = ",".join(tags)
 
                 unique_id = my_hash(title + str(date_time))
