@@ -154,7 +154,7 @@ def search_db():
     results = cursor.fetchall()
     results = [(str(event[3]), str(event[1]), str(event[2]),
                 str(event[4]), str(event[12]), datetime.strptime(
-        event[1], "%Y-%m-%d %H:%M:%S").time().strftime('%I:%M %p').lstrip('0'), datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").date() == (date.today())) for event in results]
+        event[1], "%Y-%m-%d %H:%M:%S").time().strftime('%I:%M %p').lstrip('0'), datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").date() == (date.today() - timedelta(hours=5))) for event in results]
 
     if not results:
         return
