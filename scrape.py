@@ -67,9 +67,9 @@ def get_events():
                             tags.extend([word, word.replace('-', '')])
 
                 standard_date_format = date_time.strftime('%m/%d/%Y') # ex. 1/1/2022
+                standard_date_format_without_leading_zero_in_day = date_time.strftime('%m/%-d/%Y') # ex. 1/1/2022
                 tags.extend(
-                    [standard_date_format, standard_date_format[:6] + standard_date_format[8:]])
-
+                    [standard_date_format, standard_date_format[:6] + standard_date_format[8:], standard_date_format_without_leading_zero_in_day])
                 tags = ",".join(tags)
 
                 unique_id = my_hash(title + str(date_time))
