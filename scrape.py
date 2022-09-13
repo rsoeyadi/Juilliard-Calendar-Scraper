@@ -66,6 +66,10 @@ def get_events():
                         for word in hyphenated_words:
                             tags.extend([word, word.replace('-', '')])
 
+                standard_date_format = date_time.strftime('%m/%d/%Y') # ex. 1/1/2022
+                tags.extend(
+                    [standard_date_format, standard_date_format[:6] + standard_date_format[8:]])
+
                 tags = ",".join(tags)
 
                 unique_id = my_hash(title + str(date_time))
