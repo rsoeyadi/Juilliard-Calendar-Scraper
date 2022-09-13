@@ -50,7 +50,9 @@ def get_events():
                     time2 = time2.replace(":00", "")
                 day_of_week = date_time.strftime('%A') # for searching db by day of week in app
                 title = e.find('div', {'class': 'title-subtitle'}).text
-                venue = e.find('div', {'class': 'field--name-field-venue'}).text
+                print(title)
+                venue = e.find(
+                    'div', {'class': 'field--name-field-venue field__item'}).text if e.find('div', {'class': 'field--name-field-venue field__item'}) else ''
                 tags = e.find('div', {'class': 'field--name-field-event-tags'}).text.split('\n')
                 yyyymmdd = date_time.strftime('%Y%m%d') 
                 link = "http://juilliard.edu" + e.find(
