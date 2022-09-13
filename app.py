@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, g, session, redirect, url_for
 import sqlite3
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import re
 
 app = Flask(__name__)
@@ -152,10 +152,9 @@ def search_db():
             (datetime.now().strftime('%Y%m%d'),
              ))
     results = cursor.fetchall()
-
     results = [(str(event[3]), str(event[1]), str(event[2]),
                 str(event[4]), str(event[12]), datetime.strptime(
-        event[1], "%Y-%m-%d %H:%M:%S").time().strftime('%I:%M %p').lstrip('0'), datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").date() == date.today()) for event in results]
+        event[1], "%Y-%m-%d %H:%M:%S").time().strftime('%I:%M %p').lstrip('0'), (datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S") + timedelta(hours=-5)).date() == date.today()) for event in results]
 
     if not results:
         return
