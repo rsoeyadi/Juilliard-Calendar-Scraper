@@ -67,8 +67,8 @@ def get_events():
                 standard_date_format = date_time.strftime('%m/%d/%Y') # ex. 1/01/2022
                 tags.extend( # different date forms, ex. 1/1/22, 1/01/22, etc.
                     [standard_date_format, standard_date_format[:6] + standard_date_format[8:], date_time.strftime(
-                        '%m/%-d/%Y'), standard_date_format[:3] + standard_date_format[4:6] + standard_date_format[8:] if standard_date_format[3] == '0' else ''])
-                
+                        '%m/%-d/%Y'), standard_date_format[:3] + standard_date_format[4:6] + standard_date_format[8:] if standard_date_format[3] == '0' else '',
+                        standard_date_format[1:] if standard_date_format[0] == '0' else ''])
                 while '' in tags:
                     tags.remove('')
 
