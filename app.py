@@ -145,17 +145,17 @@ def search_db():
                 if keywords[i] and keywords[i] != '':
                     qs.append(keywords[i])
         query += ("ORDER BY date_time ASC")
-        cursor.execute(query.format(datetime.now().strftime('%Y%m%d'), *qs,))
+        cursor.execute(query.format(datetime.now().strftime("%Y%m%d"), *qs,))
     else:
         cursor.execute(
             "SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",
-            (datetime.now().strftime('%Y%m%d'),
+            (datetime.now().strftime("%Y%m%d"),
              ))
     results = cursor.fetchall()
     results = [(str(event[3]), str(event[1]), str(event[2]),
                 str(event[4]), str(event[12]), datetime.strptime(
-        event[1], "%Y-%m-%d %H:%M:%S").time().strftime('%I:%M %p').lstrip('0'), str(datetime.strptime(
-        event[1], "%Y-%m-%d %H:%M:%S").date()) == str((datetime.today() - timedelta(hours=4)).strftime('%Y-%m-%d'))) for event in results]
+        event[1], "%Y-%m-%d %H:%M:%S").time().strftime("%I:%M %p").lstrip('0'), str(datetime.strptime(
+        event[1], "%Y-%m-%d %H:%M:%S").date()) == str((datetime.today() - timedelta(hours=4)).strftime("%Y-%m-%d"))) for event in results]
     
     if not results:
         return
