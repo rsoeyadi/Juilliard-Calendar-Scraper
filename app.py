@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, g, session, redirect, url_for
 import sqlite3
 from datetime import datetime, date, timedelta
 import re
+import random
 
 app = Flask(__name__)
 app.secret_key = "\x0b\x16\x8al\x14\xa5&\xf2\xf5\x85\xf8\xed\t\xe8\xb1Z\x9e\xbbN\xfcR87"
@@ -29,6 +30,12 @@ def index():
         numberOfEvents=numberOfEvents,
         desc=session.get('desc'))
 
+
+@app.route("/see_grad_recitals", methods=['POST'])
+def see_grad_recitals():
+    if request.method == 'POST':
+        session['keywords'] = ['graduating']
+    return redirect(url_for('index'))
 
 @app.route("/sort", methods=['POST'])
 def toggleDesc():
