@@ -69,6 +69,13 @@ def get_events():
                     [standard_date_format, standard_date_format[:6] + standard_date_format[8:], date_time.strftime(
                         '%m/%-d/%Y'), standard_date_format[:3] + standard_date_format[4:6] + standard_date_format[8:] if standard_date_format[3] == '0' else '',
                         standard_date_format[1:] if standard_date_format[0] == '0' else ''])
+
+                instruments = "Piano Violin Viola Cello Bass Guitar Flute Clarinet Saxophone Trumpet Trombone Tuba Percussion Harp Voice Organ".split()
+
+                # check for graduting students' recitals
+                if ';' not in title and ("," in title) and any(instrument in title for instrument in instruments) and ("Faculty" not in title) and ("Preparatory Education" not in tags):
+                    tags.append("graduating")
+
                 while '' in tags:
                     tags.remove('')
 
