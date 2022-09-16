@@ -74,7 +74,7 @@ def get_events():
 
                 # check for graduting students' recitals
                 if ';' not in title and ("," in title) and any(instrument in title for instrument in instruments) and ("Faculty" not in title):
-                    tags.extend(["student", "recital", "graduate", "graduating"])
+                    tags.extend(["student", "graduate", "graduating"])
 
                 while '' in tags:
                     tags.remove('')
