@@ -73,8 +73,8 @@ def get_events():
                 instruments = "Piano Violin Viola Cello Bass Guitar Flute Clarinet Saxophone Trumpet Trombone Tuba Percussion Harp Voice Organ".split()
 
                 # check for graduting students' recitals
-                if ';' not in title and ("," in title) and any(instrument in title for instrument in instruments) and ("Faculty" not in title) and ("Preparatory Education" not in tags):
-                    tags.append("graduating")
+                if ';' not in title and ("," in title) and any(instrument in title for instrument in instruments) and ("Faculty" not in title):
+                    tags.extend(["student", "recital", "graduate", "graduating"])
 
                 while '' in tags:
                     tags.remove('')
