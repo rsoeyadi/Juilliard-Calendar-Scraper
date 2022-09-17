@@ -42,7 +42,7 @@ li {
   line-height: 30px;
 }
 
-#last-updated-text {
+#last-updated-text, .event-date.happening-today {
   text-transform: uppercase;
   line-height: 1;
   background: linear-gradient(
@@ -122,7 +122,6 @@ hr {
 
 .event.happening-today {
   --border-width: 3px;
-
   position: relative;
   align-items: center;
   color: white;
@@ -190,10 +189,6 @@ hr {
 .event-date {
   color: rgb(217 217 217);
   display: inline-block;
-}
-
-.event-date.happening-today {
-  
 }
 
 /* button design by Dribbble */
