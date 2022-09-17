@@ -232,8 +232,8 @@
             a.setAttribute("id", this.id + "autocomplete-list");
             a.setAttribute("class", "autocomplete-items");
             this.parentNode.appendChild(a);
-            console.log(arr.length)
             var numberOfAutoCompleteItemsShown = 0;
+            var submit_button = document.getElementById("submit-button");
             for (i = 0; i < arr.length; i++) {
                 if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                     b = document.createElement("DIV");
@@ -242,11 +242,13 @@
                     b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                     b.addEventListener("click", function (e) {
                         inp.value = this.getElementsByTagName("input")[0].value;
-                        var submit_button = document.getElementById("submit-button");
                         submit_button.click();
                         closeAllLists();
                     });
+                    /* place submit button below autocomplete list */
+                    
                     a.appendChild(b);
+
                     numberOfAutoCompleteItemsShown += 1;
                     if (numberOfAutoCompleteItemsShown == 10) {
                         break;
