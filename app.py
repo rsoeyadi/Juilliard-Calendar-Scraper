@@ -19,6 +19,7 @@ def index():
             data.reverse()
     lastUpdated = get_last_updated_time()
     keywords = get_keywords()
+    keywords_list = get_keyword_list() # for dropdown menu
 
     return render_template(
         "index.html",
@@ -27,8 +28,19 @@ def index():
         lastUpdatedTime=lastUpdated,
         keywords=keywords,
         numberOfEvents=numberOfEvents,
-        desc=session.get('desc'))
+        desc=session.get('desc'),
+        keywords_list=keywords_list)
 
+def get_keyword_list():
+    db = getattr(g, '_database', None)
+
+    if db is None:
+        db = g._database = sqlite3.connect('./juilliard.db')
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM keywords")
+    results = (cursor.fetchall())
+    results = [keyword[0] for keyword in results]
+    return results
 
 @app.route("/sort", methods=['POST'])
 def toggleDesc():
@@ -152,10 +164,16 @@ def search_db():
             (datetime.now().strftime("%Y%m%d"),
              ))
     results = cursor.fetchall()
-    results = [(str(event[3]), str(event[1]), str(event[2]),
-                str(event[4]), str(event[12]), datetime.strptime(
-        event[1], "%Y-%m-%d %H:%M:%S").time().strftime("%I:%M %p").lstrip('0'), str(datetime.strptime(
-        event[1], "%Y-%m-%d %H:%M:%S").date()) == str((datetime.today() - timedelta(hours=4)).strftime("%Y-%m-%d"))) for event in results]
+    results = [(
+                    str(event[3]), # venue
+                    str(event[1]), # date_time
+                    str(event[2]), # title
+                    str(event[4]), # tags
+                    str(event[12]), # link
+                    datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").time().strftime("%I:%M %p").lstrip('0'), 
+                    str(datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").date()) == str((datetime.today() - timedelta(hours=4)).strftime("%Y-%m-%d")), 
+                    event[13]) 
+                for event in results]
     
     if not results:
         return

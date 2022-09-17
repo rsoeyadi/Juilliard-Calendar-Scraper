@@ -1,53 +1,80 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <!-- Primary Meta Tags -->
-    <title>Juilcal | Keyword Search</title>
-    <meta name="title" content="Juilcal | Search Juilliard's Performance Calendar">
-    <meta name="description"
-        content="A convenient way to search Juilliard's more than 700 performances in music, dance, and drama. Updated every 20 minutes.">
-    <link rel="icon" sizes="16x16" href="/static/assets/favicon-16x16.png">
-    <link rel="icon" sizes="32x32" href="/static/assets/favicon-32x32.png">
-    <link rel="icon" sizes="192x192" href="/static/assets/android-chrome-192x192.png">
-    <link rel="icon" sizes="512x512" href="/static/assets/android-chrome-512x512.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="/static/assets/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/apple-touch-icon.png">
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://juilcal.com">
-    <meta property="og:title" content="Juilcal | Search Juilliard's Performance Calendar">
-    <meta property="og:description"
-        content="A convenient way to search Juilliard's more than 700 performances in music, dance, and drama. Updated every 20 minutes.">
-    <meta property="og:image" content="https://ok4static.oktacdn.com/fs/bco/7/fs04j6jufgtQV47gM1t7">
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://juilcal.com">
-    <meta property="twitter:title" content="Juilcal | Search Juilliard's Performance Calendar">
-    <meta property="twitter:description"
-        content="A convenient way to search Juilliard's more than 700 performances in music, dance, and drama. Updated every 20 minutes.">
-    <meta property="twitter:image" content="https://ok4static.oktacdn.com/fs/bco/7/fs04j6jufgtQV47gM1t7">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/easy-popup.css">
-    <script src="../static/js/easy-popup.js"></script>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RQD5ZSCPD5"></script>
-<script>
-
+    <head>
+        <!-- Primary Meta Tags -->
+        <title>Juilcal | Keyword Search</title>
+        <meta name="title"
+              content="Juilcal | Search Juilliard's Performance Calendar">
+        <meta name="description"
+              content="A convenient way to search Juilliard's more than 700 performances in music, dance, and drama. Updated every 20 minutes.">
+        <link rel="icon" sizes="16x16" href="/static/assets/favicon-16x16.png">
+        <link rel="icon" sizes="32x32" href="/static/assets/favicon-32x32.png">
+        <link rel="icon"
+              sizes="192x192"
+              href="/static/assets/android-chrome-192x192.png">
+        <link rel="icon"
+              sizes="512x512"
+              href="/static/assets/android-chrome-512x512.png">
+        <link rel="apple-touch-icon"
+              sizes="57x57"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="60x60"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="72x72"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="76x76"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="114x114"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="120x120"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="152x152"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="167x167"
+              href="/static/assets/apple-touch-icon.png">
+        <link rel="apple-touch-icon"
+              sizes="180x180"
+              href="/static/assets/apple-touch-icon.png">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://juilcal.com">
+        <meta property="og:title"
+              content="Juilcal | Search Juilliard's Performance Calendar">
+        <meta property="og:description"
+              content="A convenient way to search Juilliard's more than 700 performances in music, dance, and drama. Updated every 20 minutes.">
+        <meta property="og:image"
+              content="https://ok4static.oktacdn.com/fs/bco/7/fs04j6jufgtQV47gM1t7">
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://juilcal.com">
+        <meta property="twitter:title"
+              content="Juilcal | Search Juilliard's Performance Calendar">
+        <meta property="twitter:description"
+              content="A convenient way to search Juilliard's more than 700 performances in music, dance, and drama. Updated every 20 minutes.">
+        <meta property="twitter:image"
+              content="https://ok4static.oktacdn.com/fs/bco/7/fs04j6jufgtQV47gM1t7">
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500&display=swap"
+              rel="stylesheet">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="../static/css/easy-popup.css">
+        <script src="../static/js/easy-popup.js"></script>
+    </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQD5ZSCPD5"></script>
+    <script>
     window.dataLayer = window.dataLayer || [];
 
     function gtag() {
@@ -55,121 +82,143 @@
     }
     gtag('js', new Date());
     gtag('config', 'G-RQD5ZSCPD5');
-</script>
-
-<body>
-    <div class="wrapper">
-        <div id="intro">
-            <h1>Juilcal</h1>
-            <h2>{{ now.year }} - {{ now.year + 1 }}</h2>
-            <a class="trigger">
-                <button id="why-button" role="button">Why Juilcal?</button>
-            </a>
-            <div class="modal">
-                <h2 id="modal-heading">Why Juilcal?</h2>
-                <p>This website exists as a more convenient way to peruse Juilliard's performance
-                    calendar, hopefully resulting in an increased number of people attending Juilliard's events.</p>
-                <p>Juilliard's performance calendar page lacks flexibility when searching for events. With Juilcal, you
-                    can see events more specific to what you're looking for.</p>
-                <p>Play around with it!</p>
-                <!-- <p>- Ryan</p> -->
+    </script>
+    <body>
+        <div class="wrapper">
+            <div id="intro">
+                <h1>Juilcal</h1>
+                <h2>{{ now.year }} - {{ now.year + 1 }}</h2>
+                <a class="trigger">
+                    <button id="why-button" role="button">Why Juilcal?</button>
+                </a>
+                <div class="modal">
+                    <h2 id="modal-heading">Why Juilcal?</h2>
+                    <p>
+                        This website exists as a more convenient way to peruse Juilliard's performance
+                        calendar, hopefully resulting in an increased number of people attending Juilliard's events.
+                    </p>
+                    <p>
+                        Juilliard's performance calendar page lacks flexibility when searching for events. With Juilcal, you
+                        can see events more specific to what you're looking for.
+                    </p>
+                    <p>Play around with it!</p>
+                    <!-- <p>- Ryan</p> -->
+                </div>
+                <p id="last-updated-text">last updated {{ lastUpdatedTime }} ago</p>
+                <p>Results are taken directly from Juilliard's website and updated every 20 minutes.</p>
+                <p>
+                    You can search events using days of the week, a time of day, a date (ex. "5/21/23"), a specific performer, "free", an instrument, a division, etc.
+                </p>
+                <p>
+                    If you have many parameters to consider, you can search using <b>combinations of all of the above</b>.
+                </p>
             </div>
-            <p id="last-updated-text">last updated {{ lastUpdatedTime }} ago</p>
-            <p>Results are taken directly from Juilliard's website and updated every 20 minutes.</p>
-            <p>You can search events using days of the week, a time of day, a date (ex. "5/21/23"), a specific performer, "free", an instrument, a division, etc.</p>
-            <p>If you have many parameters to consider, you can search using <b>combinations of all of the above</b>.</p>
-        </div>
-        <form action="/add_keyword" , method="POST">
-            {% if not q %}
-            <input type="search" name="q" placeholder="Search">
-            {% else %}
-            <input type="search" name="q" placeholder="Search" value="{{q}}">
-            {% endif %}
-            <div class="button-wrapper">
-                <button name="add_keyword" type="submit">Submit</button>
-            </div>
-        </form>
-        <!-- {% if keywords|length > 0 %} -->
-        <hr>
-        <form action="/clear_all_filters" , method="POST">
-            <input type="submit" value="clear search terms" name="clear_all_filters" id="clear-filters-button">
+            <form id="search-bar-container" action="/add_keyword" , method="POST" autocomplete="off">
+                {% if not q %}
+                    <input type="search" id="search-bar" name="q" placeholder="Search">
+                {% else %}
+                    <input type="search"
+                           id="search-bar"
+                           name="q"
+                           placeholder="Search"
+                           value="{{q}}">
+                {% endif %}
+                <div class="button-wrapper">
+                    <button name="add_keyword" type="submit" id="submit-button">Submit</button>
+                </div>
+                
+            </form>
+            
+            <!-- {% if keywords|length > 0 %} -->
+            <hr>
+            <form action="/clear_all_filters" , method="POST">
+                <input type="submit"
+                       value="clear search terms"
+                       name="clear_all_filters"
+                       id="clear-filters-button">
             </input>
         </form>
         <div class="filters-wrapper">
             {% for keyword in keywords %}
-            <form action="/remove_keyword" , method="POST">
-                <input type="submit" value="{{ keyword }}" name="remove_keyword" class="filter-button">
+                <form action="/remove_keyword" , method="POST">
+                    <input type="submit"
+                           value="{{ keyword }}"
+                           name="remove_keyword"
+                           class="filter-button">
                 </input>
             </form>
-            {% endfor %}
-        </div>
-        <!-- {% endif %} -->
-        <hr>
-        <h1>Search Results</h1>
-        {% if numberOfEvents == 1 %}
+        {% endfor %}
+    </div>
+    <!-- {% endif %} -->
+    <hr>
+    <h1>Search Results</h1>
+    {% if numberOfEvents == 1 %}
         <p>{{ numberOfEvents }} event matched</p>
-        {% elif numberOfEvents > 0 %}
+    {% elif numberOfEvents > 0 %}
         <p>{{ numberOfEvents }} events matched</p>
         <form action="/sort" , method="POST">
             {% if desc %}
-            <div class="button-wrapper">
-                <button name="sort" type="submit">View Ascending</button>
-            </div>
+                <div class="button-wrapper">
+                    <button name="sort" type="submit">View Ascending</button>
+                </div>
             {% else %}
-            <div class="button-wrapper">
-                <button name="sort" type="submit">View Descending</button>
-            </div>
+                <div class="button-wrapper">
+                    <button name="sort" type="submit">View Descending</button>
+                </div>
             {% endif %}
         </form>
-        {% endif %}
-        <div class="results">
-            {% if not results %}
+    {% endif %}
+    <div class="results">
+        {% if not results %}
             <p>No results found.</p>
-            {% else %}
+        {% else %}
             <ul>
                 {% for result in results %}
-                <li>
-                    <div class="event-wrapper">
-                        {% if result[6] == true %}
-                        <ul class="event happening-today" data-aos="fade-up" data-aos-offset="-50">
-                            {% else %}
-                            <ul class="event" data-aos="fade-up" data-aos-offset="-50">
-                                {% endif %}
-                                <a href="{{ result[4] }}" target="_blank">
-                                    <div class="event-hover">
-                                        <p>Click for more information</p>
-                                    </div>
-                                </a>
-                                <a class="event-link" href="{{ result[4] }}" target="_blank">
-                                    <li class="event-title">{{ result[2] }}</li>
-                                    <hr>
-                                    {% if 'Free' in result[3] %}
-                                    <li class="free">Free event</li>
+                    <li>
+                        <div class="event-wrapper">
+                            {% if result[6] == true %}
+                                <ul class="event happening-today"
+                                    data-aos="fade-up"
+                                    data-aos-offset="-50">
+                                {% else %}
+                                    <ul class="event" data-aos="fade-up" data-aos-offset="-50">
                                     {% endif %}
-                                    <div class="event-venue-date-wrapper">
-                                        <li class="event-venue">{{ result[0] }}</li>
-                                        {% if result[6] == true %}
-                                        <li class="event-date happening-today">TODAY at {{ result[5] }}!</li>
-                                        {% else %}
-                                        <li class="event-date">{{ result[1]|datetimeformat }}</li>
-                                        {% endif %}
-                                    </div>
-                                </a>
-                            </ul>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+                                    <a href="{{ result[4] }}" target="_blank">
+                                        <div class="event-hover">
+                                            <p>Click for more information</p>
+                                        </div>
+                                    </a>
+                                    <a class="event-link" href="{{ result[4] }}" target="_blank">
+                                        <li class="event-title">{{ result[2] }}</li>
+                                        <li class="event-subtitle">{{ result[7] }}</li>
+                                        <hr>
+                                        {% if 'Free' in result[3] %}<li class="free">Free event</li>{% endif %}
+                                        <div class="event-venue-date-wrapper">
+                                            <li class="event-venue">{{ result[0] }}</li>
+                                            {% if result[6] == true %}
+                                                <li class="event-date happening-today">TODAY at {{ result[5] }}!</li>
+                                            {% else %}
+                                                <li class="event-date">{{ result[1]|datetimeformat }}</li>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </ul>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         </div>
     </div>
-    <button onclick="topFunction()" id="To-Top-Button" title="Back to top of page">Back to top</button>
-
+    <button onclick="topFunction()"
+            id="To-Top-Button"
+            title="Back to top of page">
+        Back to top
+    </button>
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
     $(window).scroll(function () { /* store position of window */
         sessionStorage.scrollTop = $(this).scrollTop();
@@ -210,5 +259,79 @@
         closeButtonHTML: '<span class="close"></span>', // close button HTML
     });
 </script>
+<script>
+    function autocomplete(inp, arr) {
+            var currentFocus;
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                this.parentNode.appendChild(a);
+                for (i = 0; i < arr.length; i++) {
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        b = document.createElement("DIV");
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        b.addEventListener("click", function (e) {
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            var submit_button = document.getElementById("submit-button");
+                            submit_button.click();
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                var searchbar = document.getElementById("search-bar");
 
+                if (e.keyCode == 40) {
+                    currentFocus++;
+                    addActive(x);
+                    searchbar.value = x[currentFocus].getElementsByTagName("input")[0].value;
+                } else if (e.keyCode == 38) { //up
+                    currentFocus--;
+                    addActive(x);
+                     searchbar.value = x[currentFocus].getElementsByTagName("input")[0].value;
+                } 
+            });
+            function addActive(x) {
+                if (!x) return false;
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+                if (elmnt == document.getElementById("submit-button")) {
+                    document.getElementById("submit-button").click();
+                }
+            });
+        }
+
+        var keywords_list = {{ keywords_list|safe }};
+        autocomplete(document.getElementById("search-bar"), keywords_list);
+</script>
 </html>
