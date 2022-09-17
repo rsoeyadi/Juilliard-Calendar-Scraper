@@ -4,11 +4,13 @@ import sqlite3
 from datetime import datetime
 import re
 
+
 class Event:
-    def __init__(self, unique_id, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd, link):
+    def __init__(self, unique_id, date_time, title, subtitle, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd, link):
         self.unique_id = unique_id
         self.date_time = date_time
         self.title = title.strip()
+        self.subtitle = subtitle.strip()
         self.venue = venue
         self.tags = tags
         self.month = month
@@ -59,7 +61,10 @@ def get_events():
                     time2 = time2.replace(":00", "")
                 # for searching db by day of week in app
                 day_of_week = date_time.strftime('%A')
-                title = e.find('div', {'class': 'title-subtitle'}).text
+                title = e.find(
+                    'div', {'class': 'title-subtitle'}).find('h3').text
+                subtitle = e.find(
+                    'div', {'class': 'field--name-field-subtitle'}).text if e.find('div', {'class': 'field--name-field-subtitle'}) else ''
                 venue = e.find(
                     'div', {'class': 'field--name-field-venue field__item'}).text if e.find('div', {'class': 'field--name-field-venue field__item'}) else ''
                 tags = e.find(
@@ -68,6 +73,7 @@ def get_events():
                 link = "http://juilliard.edu" + e.find(
                     'div', {'class': 'field--name-field-event-purchase-url'}).find('a')['href']
 
+                tags = list(set(tags))
                 if '-' in title:
                     hyphenated_words = [
                         word for word in title.split() if '-' in word]
@@ -99,7 +105,7 @@ def get_events():
                 tags = ",".join(tags)
 
                 unique_id = my_hash(title + str(date_time))
-                event = Event(unique_id, date_time, title, venue, tags, month,
+                event = Event(unique_id, date_time, title, subtitle, venue, tags, month,
                               day, year, time, time2, day_of_week, yyyymmdd, link)
                 results.append(event)
 
@@ -115,8 +121,8 @@ def insert_events_into_db(events):
     for event in events:
         conn = sqlite3.connect('juilliard.db')
         c = conn.cursor()
-        c.execute('REPLACE INTO events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (event.unique_id, event.date_time, event.title, event.venue,
-                  event.tags, event.month, event.day, event.year, event.time, event.time2, event.day_of_week, int(event.yyyymmdd), event.link))
+        c.execute('REPLACE INTO events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (event.unique_id, event.date_time, event.title, event.venue,
+                  event.tags, event.month, event.day, event.year, event.time, event.time2, event.day_of_week, int(event.yyyymmdd), event.link, event.subtitle))
         conn.commit()
         conn.close()
 
@@ -132,19 +138,27 @@ def insert_current_time_into_db():
 
 def insert_each_word_into_db(events):
     keywords = set()
-    for event in events:
+    for event in events:    
         conn = sqlite3.connect('juilliard.db')
         c = conn.cursor()
         for word in event.title.split():
             keywords.add(re.sub(r'\W+', '', word.lower()))
-        for word in event.venue.split():
-            keywords.add(re.sub(r'\W+', '', word.lower()))
         for word in event.tags.split(','):
             keywords.add(word.lower())
+        
+        # if new line in title, remove it
+        if '\n' in event.title:
+            event.title = event.title.replace('\n', ' ')
 
-    months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
-    days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-    times = ["1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12pm","8am", "9am", "10am", "11am", "2:30pm", "3:30pm", "4:30pm", "5:30pm", "6:30pm", "7:30pm", "8:30pm"]
+        keywords.add(event.title.lower())
+        keywords.add(event.venue.lower())
+
+    months = ["january", "february", "march", "april", "may", "june",
+              "july", "august", "september", "october", "november", "december"]
+    days = ["monday", "tuesday", "wednesday",
+            "thursday", "friday", "saturday", "sunday"]
+    times = ["1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12pm",
+             "8am", "9am", "10am", "11am", "2:30pm", "3:30pm", "4:30pm", "5:30pm", "6:30pm", "7:30pm", "8:30pm"]
     for month in months:
         keywords.add(month)
     for day in days:
@@ -156,19 +170,15 @@ def insert_each_word_into_db(events):
     c = conn.cursor()
 
     for keyword in keywords:
+        print(keyword)
         if len(keyword) <= 2:
             continue
-
-        if " " in keyword:
-            for word in keyword.split():
-                c.execute('REPLACE INTO keywords VALUES (?)',
-                          (word,))
-        else:
-            c.execute('REPLACE INTO keywords VALUES (?)',
-                      (keyword,))
+        
+        c.execute('REPLACE INTO keywords VALUES (?)',
+                  (keyword,))
     conn.commit()
     conn.close()
-    
+
 
 def my_hash(s):
     h = 0
@@ -184,12 +194,11 @@ if __name__ == '__main__':
     conn = sqlite3.connect('juilliard.db')
     c = conn.cursor()
 
-    c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd INTEGER, link)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS events (unique_id INTEGER PRIMARY KEY, date_time, title, venue, tags, month, day, year, time, time2, day_of_week, yyyymmdd INTEGER, link, subtitle)''')
     c.execute(
         '''CREATE TABLE IF NOT EXISTS extras (filename PRIMARY KEY, current_time)''')
     c.execute(
         '''CREATE TABLE IF NOT EXISTS keywords (keyword PRIMARY KEY)''')
-
 
     insert_current_time_into_db()
     insert_events_into_db(events)
