@@ -221,6 +221,11 @@
     });
 </script>
 <script>
+    /* remove leading spaces from search bar */
+    document.getElementById("search-bar").addEventListener("input", function () {
+        this.value = this.value.replace(/^\s+/, "");
+    });
+
     function autocomplete(inp, arr) {
         var currentFocus;
         inp.addEventListener("input", function (e) {
