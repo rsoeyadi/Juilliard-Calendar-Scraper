@@ -196,7 +196,69 @@ hr {
   margin-top: 2em;
 }
 
+#submit-button {
+  display: none;
+}
+
 button[type="submit"] {
+  appearance: none;
+  background-color: #fafbfc;
+  border: 1px solid rgb(27 31 35 / 15%);
+  border-radius: 6px;
+  box-shadow: rgb(27 31 35 / 4%) 0 1px 0, rgb(255 255 255 / 25%) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 10px 20px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+#search-bar-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 1em;
+}
+
+button[type="submit"]:hover {
+  background-color: #f3f4f6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+button[type="submit"]:disabled {
+  background-color: #fafbfc;
+  border-color: rgb(27 31 35 / 15%);
+  color: #959da5;
+  cursor: default;
+}
+
+button[type="submit"]:active {
+  background-color: #edeff2;
+  box-shadow: rgb(225 228 232 / 20%) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+button[type="submit"]:focus {
+  outline: 1px transparent;
+}
+
+button[type="submit"]::before {
+  display: none;
+}
+
+button[type="submit"]:-webkit-details-marker {
   display: none;
 }
 
@@ -455,7 +517,7 @@ button[type="submit"] {
 }
 
 .autocomplete-items {
-  margin-top: -1.5em;
+  margin-top: 1.5em;
   z-index: 99;
   left: 0;
   right: 0;
@@ -530,7 +592,7 @@ button[type="submit"] {
     color: rgb(255 255 255 / 70%);
   }
 
-  button[type="submit"] {
+  #submit-button {
     appearance: none;
     background-color: #fafbfc;
     border: 1px solid rgb(27 31 35 / 15%);
@@ -561,34 +623,34 @@ button[type="submit"] {
     grid-column-gap: 1em;
   }
 
-  button[type="submit"]:hover {
+  #submit-button:hover {
     background-color: #f3f4f6;
     text-decoration: none;
     transition-duration: 0.1s;
   }
 
-  button[type="submit"]:disabled {
+  #submit-button:disabled {
     background-color: #fafbfc;
     border-color: rgb(27 31 35 / 15%);
     color: #959da5;
     cursor: default;
   }
 
-  button[type="submit"]:active {
+  #submit-button:active {
     background-color: #edeff2;
     box-shadow: rgb(225 228 232 / 20%) 0 1px 0 inset;
     transition: none 0s;
   }
 
-  button[type="submit"]:focus {
+  #submit-button:focus {
     outline: 1px transparent;
   }
 
-  button[type="submit"]::before {
+  #submit-button::before {
     display: none;
   }
 
-  button[type="submit"]:-webkit-details-marker {
+  #submit-button:-webkit-details-marker {
     display: none;
   }
 
