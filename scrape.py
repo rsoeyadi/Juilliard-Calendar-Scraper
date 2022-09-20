@@ -92,7 +92,8 @@ def get_events():
 
                 # check for graduting students' recitals
                 if ';' not in title and ("," in title) and any(instrument in title for instrument in instruments) and ("Faculty" not in title):
-                    tags.extend(["graduate", "graduating"])
+                    tags.extend(["graduate", "graduating",
+                                "grad recital", "senior recital"])
 
                 for word in title.split():
                     tags.append(re.sub(r'\W+', '', word.lower()))
@@ -138,14 +139,14 @@ def insert_current_time_into_db():
 
 def insert_each_word_into_db(events):
     keywords = set()
-    for event in events:    
+    for event in events:
         conn = sqlite3.connect('juilliard.db')
         c = conn.cursor()
         for word in event.title.split():
             keywords.add(re.sub(r'\W+', '', word.lower()))
         for word in event.tags.split(','):
             keywords.add(word.lower())
-        
+
         # if new line in title, remove it
         if '\n' in event.title:
             event.title = event.title.replace('\n', ' ')
@@ -173,7 +174,7 @@ def insert_each_word_into_db(events):
         print(keyword)
         if len(keyword) <= 2:
             continue
-        
+
         c.execute('REPLACE INTO keywords VALUES (?)',
                   (keyword,))
     conn.commit()
