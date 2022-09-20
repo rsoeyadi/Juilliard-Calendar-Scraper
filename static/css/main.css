@@ -13,6 +13,12 @@ h1 {
   font-weight: 300;
 }
 
+input {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+
 p {
   font-size: 16px;
   line-height: 27.5px;
