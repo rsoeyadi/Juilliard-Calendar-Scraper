@@ -94,7 +94,9 @@ def get_events():
                 if ';' not in title and ("," in title) and any(instrument in title for instrument in instruments) and ("Faculty" not in title):
                     tags.extend(["graduate", "graduating",
                                 "grad recital", "grad recitals", "senior recital", "seniors"])
-
+                if 'precollege' not in tags and 'pre-college' not in tags:
+                    tags.extend(["college-only", "college-division"])
+                    
                 for word in title.split():
                     tags.append(re.sub(r'\W+', '', word.lower()))
                 for word in venue.split():
