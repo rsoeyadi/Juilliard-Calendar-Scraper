@@ -96,7 +96,7 @@ def get_events():
                                 "grad recital", "grad recitals", "senior recital", "seniors"])
                 if 'precollege' not in tags and 'pre-college' not in tags:
                     tags.extend(["college-only", "college-division"])
-                    
+
                 for word in title.split():
                     tags.append(re.sub(r'\W+', '', word.lower()))
                 for word in venue.split():
@@ -173,7 +173,6 @@ def insert_each_word_into_db(events):
     c = conn.cursor()
 
     for keyword in keywords:
-        print(keyword)
         if len(keyword) <= 2:
             continue
 
