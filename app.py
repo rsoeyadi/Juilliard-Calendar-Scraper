@@ -171,7 +171,7 @@ def search_db():
                     str(event[4]), # tags
                     str(event[12]), # link
                     datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").time().strftime("%I:%M %p").lstrip('0'), 
-                    str(datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").date()) == str((datetime.today() - timedelta(hours=3)).strftime("%Y-%m-%d")), 
+                    str(datetime.strptime(event[1], "%Y-%m-%d %H:%M:%S").date()) == str((datetime.today() - timedelta(hours=5)).strftime("%Y-%m-%d")), 
                     event[13]) 
                 for event in results]
     
