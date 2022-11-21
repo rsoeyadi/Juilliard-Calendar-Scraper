@@ -29,7 +29,8 @@ def index():
         keywords=keywords,
         numberOfEvents=numberOfEvents,
         desc=session.get('desc'),
-        keywords_list=keywords_list)
+        keywords_list=keywords_list,
+        show_all_events=session.get('show_all_events'))
 
 def get_keyword_list():
     db = getattr(g, '_database', None)
@@ -51,6 +52,13 @@ def toggleDesc():
             session['desc'] = True
     return redirect(url_for('index'))
 
+@app.route("/show_all_events", methods=['POST'])
+def show_all_events():
+    if session.get('show_all_events'):
+        session['show_all_events'] = False
+    else:
+        session['show_all_events'] = True
+    return redirect(url_for('index'))
 
 @app.route("/add_keyword", methods=['POST'])
 def add_keyword():
@@ -148,7 +156,11 @@ def search_db():
     cursor = db.cursor()
 
     qs = []
-    query = "SELECT * FROM events WHERE(yyyymmdd >= {}) "
+
+    if session.get('show_all_events'):
+        query = "SELECT * FROM events WHERE (1)" # this is a bit of a hack since the query formed below will always append 'AND' after this 'WHERE' clause
+    else:
+        query = "SELECT * FROM events WHERE (yyyymmdd >= {}) "
 
     if keywords:
         for i in range(len(keywords)):
@@ -157,12 +169,22 @@ def search_db():
                 if keywords[i] and keywords[i] != '':
                     qs.append(keywords[i])
         query += ("ORDER BY date_time ASC")
-        cursor.execute(query.format(datetime.now().strftime("%Y%m%d"), *qs,))
+        if session.get('show_all_events'):
+            app.logger.info(query)
+            cursor.execute(query.format(*qs))
+        else:
+            app.logger.info(query)
+
+            cursor.execute(query.format(datetime.now().strftime("%Y%m%d"), *qs,))
     else:
-        cursor.execute(
-            "SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",
-            (datetime.now().strftime("%Y%m%d"),
-             ))
+        if session.get('show_all_events'):
+            cursor.execute(
+                "SELECT * FROM events ORDER BY date_time ASC")
+        else:
+            cursor.execute(
+                "SELECT * FROM events WHERE (yyyymmdd >= ?) ORDER BY date_time ASC",
+                (datetime.now().strftime("%Y%m%d"),
+                ))
     results = cursor.fetchall()
     results = [(
                     str(event[3]), # venue
