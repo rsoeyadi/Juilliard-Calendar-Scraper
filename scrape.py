@@ -38,7 +38,8 @@ def get_events():
 
     curr_page = 0  # start at page 1
     while True:
-        sp = get_page("https://www.juilliard.edu/stage-beyond/performance/calendar?start_date_from=-%201%20hours&start_date_thru=&division=All&tags=All&date_hidden=Date&page=", curr_page)
+        sp = get_page(
+            "https://www.juilliard.edu/stage-beyond/performance/calendar?start_date_from=09/1/22&start_date_thru=&division=All&tags=All&date_hidden=Date&page=", curr_page)
 
         # get all events on page
         events = sp.find_all('li', {'class': 'event'})
