@@ -96,6 +96,9 @@ hr {
   border-top: 1px solid #e4e4e4;
 }
 
+#no-results-found {
+  margin-top: 1em;
+}
 #events-header {
   position: relative;
   display: inline-block;
