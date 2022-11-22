@@ -121,7 +121,19 @@
         {% elif numberOfEvents > 0 %}
         <p>{{ numberOfEvents }} events matched</p>
 
-    
+        <form action="/show_all_events" , method="POST">
+            <!--shows events from beginning of the year-->
+            {% if show_all_events %}
+            <div class="button-wrapper">
+                <button name="sort" type="submit">Only current events</button>
+            </div>
+            {% else %}
+            <div class="button-wrapper">
+                <button name="sort" type="submit">Include past events</button>
+            </div>
+            {% endif %}
+        </form>
+
         <form action="/sort" , method="POST">
             {% if desc %}
             <div class="button-wrapper">
@@ -133,21 +145,10 @@
             </div>
             {% endif %}
         </form>
-        {% endif %}        
+        {% endif %}
 
-        <form action="/show_all_events" , method="POST">
-            <!--shows events from beginning of the year-->
-            {% if show_all_events %}
-            <div class="button-wrapper">
-                <button name="sort" type="submit">View Current</button>
-            </div>
-            {% else %}
-            <div class="button-wrapper">
-                <button name="sort" type="submit">View From Beginning</button>
-            </div>
-            {% endif %}
-        </form>
-        
+
+
         <div class="results">
             {% if not results %}
             <p id="no-results-found">No results found.</p>
