@@ -170,11 +170,8 @@ def search_db():
                     qs.append(keywords[i])
         query += ("ORDER BY date_time ASC")
         if session.get('show_all_events'):
-            app.logger.info(query)
             cursor.execute(query.format(*qs))
         else:
-            app.logger.info(query)
-
             cursor.execute(query.format(datetime.now().strftime("%Y%m%d"), *qs,))
     else:
         if session.get('show_all_events'):
